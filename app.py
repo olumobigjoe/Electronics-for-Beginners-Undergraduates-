@@ -5,7 +5,7 @@ import streamlit as st
 
 # ============================================================
 # ELECT4BEGINNERS
-# Main application / navigation
+# Main application
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -33,10 +33,8 @@ st.markdown(
         --cyan: #06b6d4;
         --text: #f8fafc;
         --muted: #94a3b8;
-        --border: rgba(148, 163, 184, 0.14);
     }
 
-    /* Main application */
     .stApp {
         background:
             radial-gradient(
@@ -52,21 +50,13 @@ st.markdown(
             #07111f;
     }
 
-    .main {
-        background: transparent;
-    }
-
     .block-container {
         max-width: 1400px;
         padding-top: 1.5rem;
         padding-bottom: 4rem;
     }
 
-    /* Typography */
-    h1,
-    h2,
-    h3,
-    h4 {
+    h1, h2, h3, h4 {
         color: #f8fafc !important;
     }
 
@@ -74,7 +64,8 @@ st.markdown(
         color: #cbd5e1;
     }
 
-    /* Sidebar */
+    /* SIDEBAR */
+
     section[data-testid="stSidebar"] {
         background:
             linear-gradient(
@@ -82,56 +73,69 @@ st.markdown(
                 #07111f 0%,
                 #091526 100%
             );
-        border-right: 1px solid rgba(148, 163, 184, 0.12);
+
+        border-right:
+            1px solid
+            rgba(148, 163, 184, 0.12);
     }
 
     section[data-testid="stSidebar"] > div {
         padding-top: 1rem;
     }
 
-    section[data-testid="stSidebar"] [data-testid="stPageLink"] {
+    section[data-testid="stSidebar"]
+    [data-testid="stPageLink"] {
         border-radius: 9px;
         margin: 3px 0;
     }
 
-    section[data-testid="stSidebar"] [data-testid="stPageLink"]:hover {
-        background: rgba(37, 99, 235, 0.12);
+    section[data-testid="stSidebar"]
+    [data-testid="stPageLink"]:hover {
+        background:
+            rgba(37, 99, 235, 0.12);
     }
 
-    /* Buttons */
+    /* BUTTONS */
+
     .stButton > button {
         border-radius: 10px;
         min-height: 44px;
+
         font-weight: 700;
-        border: 1px solid rgba(96, 165, 250, 0.22);
-        background: linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
+
+        border:
+            1px solid
+            rgba(96, 165, 250, 0.22);
+
+        background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
         color: white;
-        transition: all 0.2s ease;
+
+        transition:
+            all 0.2s ease;
     }
 
     .stButton > button:hover {
         transform: translateY(-2px);
-        border-color: rgba(96, 165, 250, 0.6);
+
+        border-color:
+            rgba(96, 165, 250, 0.6);
+
         box-shadow:
-            0 12px 30px rgba(37, 99, 235, 0.25);
+            0 12px 30px
+            rgba(37, 99, 235, 0.25);
     }
 
-    /* Secondary button */
-    button[kind="secondary"] {
-        background: rgba(15, 23, 42, 0.75) !important;
-        color: #dbeafe !important;
-    }
-
-    /* Divider */
     hr {
-        border-color: rgba(148, 163, 184, 0.1);
+        border-color:
+            rgba(148, 163, 184, 0.1);
     }
 
-    /* Mobile */
     @media (max-width: 768px) {
         .block-container {
             padding-left: 1rem;
@@ -145,7 +149,7 @@ st.markdown(
 
 
 # ============================================================
-# NAVIGATION
+# PAGES
 # ============================================================
 
 pages = [
@@ -216,7 +220,7 @@ pages = [
 
 
 # ============================================================
-# SIDEBAR BRANDING
+# SIDEBAR BRAND
 # ============================================================
 
 with st.sidebar:
@@ -228,28 +232,32 @@ with st.sidebar:
         ">
 
             <div style="
-                display: flex;
-                align-items: center;
-                gap: 10px;
+                display:flex;
+                align-items:center;
+                gap:10px;
             ">
 
                 <div style="
-                    width: 42px;
-                    height: 42px;
-                    border-radius: 12px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    width:42px;
+                    height:42px;
+                    border-radius:12px;
+
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+
                     background:
                         linear-gradient(
                             135deg,
                             #2563eb,
                             #06b6d4
                         );
-                    font-size: 22px;
+
+                    font-size:22px;
+
                     box-shadow:
                         0 8px 24px
-                        rgba(37, 99, 235, 0.25);
+                        rgba(37,99,235,.25);
                 ">
                     ⚡
                 </div>
@@ -257,18 +265,18 @@ with st.sidebar:
                 <div>
 
                     <div style="
-                        color: #f8fafc;
-                        font-size: 1.02rem;
-                        font-weight: 800;
-                        letter-spacing: -0.02em;
+                        color:#f8fafc;
+                        font-size:1.02rem;
+                        font-weight:800;
+                        letter-spacing:-.02em;
                     ">
                         Elect4Beginners
                     </div>
 
                     <div style="
-                        color: #64748b;
-                        font-size: 0.7rem;
-                        margin-top: 2px;
+                        color:#64748b;
+                        font-size:.7rem;
+                        margin-top:2px;
                     ">
                         Electronics made simple
                     </div>
@@ -287,38 +295,43 @@ with st.sidebar:
     st.markdown(
         """
         <div style="
-            padding: 12px;
-            margin-top: 8px;
-            margin-bottom: 14px;
-            border-radius: 12px;
-            background: rgba(37, 99, 235, 0.07);
-            border: 1px solid rgba(96, 165, 250, 0.10);
+            padding:12px;
+            margin-top:8px;
+            margin-bottom:14px;
+            border-radius:12px;
+
+            background:
+                rgba(37,99,235,.07);
+
+            border:
+                1px solid
+                rgba(96,165,250,.10);
         ">
 
             <div style="
-                color: #60a5fa;
-                font-size: 0.68rem;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
+                color:#60a5fa;
+                font-size:.68rem;
+                font-weight:800;
+                text-transform:uppercase;
+                letter-spacing:.08em;
             ">
                 Learning journey
             </div>
 
             <div style="
-                color: #e2e8f0;
-                font-size: 0.88rem;
-                font-weight: 700;
-                margin-top: 5px;
+                color:#e2e8f0;
+                font-size:.88rem;
+                font-weight:700;
+                margin-top:5px;
             ">
                 Start with the fundamentals
             </div>
 
             <div style="
-                color: #64748b;
-                font-size: 0.73rem;
-                line-height: 1.4;
-                margin-top: 4px;
+                color:#64748b;
+                font-size:.73rem;
+                line-height:1.4;
+                margin-top:4px;
             ">
                 Build your electronics knowledge
                 one concept at a time.
@@ -334,9 +347,9 @@ with st.sidebar:
     st.markdown(
         """
         <div style="
-            color: #475569;
-            font-size: 0.72rem;
-            line-height: 1.6;
+            color:#475569;
+            font-size:.72rem;
+            line-height:1.6;
         ">
             Learn<br>
             Experiment<br>
@@ -348,7 +361,7 @@ with st.sidebar:
 
 
 # ============================================================
-# RUN
+# RUN NAVIGATION
 # ============================================================
 
 nav = st.navigation(
