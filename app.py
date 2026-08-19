@@ -8,7 +8,7 @@ import streamlit as st
 # Main application
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+# BASE_DIR = Path(__file__).resolve().parent
 
 st.set_page_config(
     page_title="Elect4Beginners — Electronics Made Simple",
@@ -154,7 +154,7 @@ st.markdown(
 
 pages = [
     st.Page(
-        str(BASE_DIR / "home.py"),
+        "home.py",
         title="Home",
         icon="🏠",
         url_path="home",
@@ -162,56 +162,56 @@ pages = [
     ),
 
     st.Page(
-        str(BASE_DIR / "app_fundamentals.py"),
+        "app_fundamentals.py",
         title="Electrical Fundamentals",
         icon="🔋",
         url_path="fundamentals",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_components.py"),
+        "app_components.py",
         title="Electronic Components",
         icon="⚡",
         url_path="components",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_gates.py"),
+        "app_gates.py",
         title="Logic Gates",
         icon="🔌",
         url_path="logic-gates",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_digital_electronics.py"),
+        "app_digital_electronics.py",
         title="Digital Electronics",
         icon="💾",
         url_path="digital-electronics",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_circuit_analysis.py"),
+        "app_circuit_analysis.py",
         title="Circuit Analysis",
         icon="🧮",
         url_path="circuit-analysis",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_rectifiers.py"),
+        "app_rectifiers.py",
         title="Diodes & Rectifiers",
         icon="🔺",
         url_path="rectifiers",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_amplifiers.py"),
+        "app_amplifiers.py",
         title="Transistors & Amplifiers",
         icon="🔀",
         url_path="amplifiers",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_measurements.py"),
+        "app_measurements.py",
         title="Measurements & Instruments",
         icon="📏",
         url_path="measurements",
