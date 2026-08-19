@@ -6,7 +6,7 @@ import streamlit as st
 # ELECT4BEGINNERS — MAIN APPLICATION
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+# BASE_DIR = Path(__file__).resolve().parent
 
 
 # ------------------------------------------------------------
@@ -208,7 +208,7 @@ st.markdown(
 
 pages = [
     st.Page(
-        str(BASE_DIR / "home.py"),
+        str("home.py"),
         title="Home",
         icon="🏠",
         url_path="home",
@@ -216,56 +216,56 @@ pages = [
     ),
 
     st.Page(
-        str(BASE_DIR / "app_fundamentals.py"),
+        str("app_fundamentals.py"),
         title="Electrical Fundamentals",
         icon="🔋",
         url_path="fundamentals",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_components.py"),
+        str("app_components.py"),
         title="Electronic Components",
         icon="⚡",
         url_path="components",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_gates.py"),
+        str("app_gates.py"),
         title="Logic Gates",
         icon="🔌",
         url_path="logic-gates",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_digital_electronics.py"),
+        str("app_digital_electronics.py"),
         title="Digital Electronics",
         icon="💾",
         url_path="digital-electronics",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_circuit_analysis.py"),
+        str("app_circuit_analysis.py"),
         title="Circuit Analysis",
         icon="🧮",
         url_path="circuit-analysis",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_rectifiers.py"),
+        str("app_rectifiers.py"),
         title="Diodes & Rectifiers",
         icon="🔺",
         url_path="rectifiers",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_amplifiers.py"),
+        str("app_amplifiers.py"),
         title="Transistors & Amplifiers",
         icon="🔀",
         url_path="amplifiers",
     ),
 
     st.Page(
-        str(BASE_DIR / "app_measurements.py"),
+        str("app_measurements.py"),
         title="Measurements & Instruments",
         icon="📏",
         url_path="measurements",
