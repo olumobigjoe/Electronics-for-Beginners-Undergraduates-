@@ -16,10 +16,6 @@ st.set_page_config(
 
 # ============================================================
 # HTML HELPER
-#
-# This is important.
-# dedent() prevents Streamlit from displaying our HTML
-# as a code block.
 # ============================================================
 
 def html(content):
@@ -30,36 +26,36 @@ def html(content):
 
 
 # ============================================================
-# HOME PAGE STYLES
+# PAGE CSS
 # ============================================================
 
 html(
     """
     <style>
 
-    /* ============================================
+    /* ==========================================
        HERO
-       ============================================ */
+       ========================================== */
 
     .hero {
         position: relative;
         overflow: hidden;
 
-        padding: 3.8rem 3.5rem;
+        padding: 3.6rem 3.2rem;
 
         border-radius: 26px;
 
-        margin-bottom: 1.4rem;
+        margin-bottom: 1.2rem;
 
         background:
             radial-gradient(
-                circle at 82% 30%,
-                rgba(6, 182, 212, 0.15),
+                circle at 85% 25%,
+                rgba(6,182,212,.15),
                 transparent 25%
             ),
             radial-gradient(
-                circle at 20% 90%,
-                rgba(37, 99, 235, 0.18),
+                circle at 15% 90%,
+                rgba(37,99,235,.18),
                 transparent 30%
             ),
             linear-gradient(
@@ -70,18 +66,17 @@ html(
 
         border:
             1px solid
-            rgba(96, 165, 250, 0.16);
+            rgba(96,165,250,.16);
 
         box-shadow:
             0 25px 70px
-            rgba(0, 0, 0, 0.22);
+            rgba(0,0,0,.22);
     }
 
 
     .hero-content {
         position: relative;
         z-index: 2;
-
         max-width: 720px;
     }
 
@@ -95,19 +90,19 @@ html(
         border-radius: 999px;
 
         background:
-            rgba(37, 99, 235, 0.10);
+            rgba(37,99,235,.10);
 
         border:
             1px solid
-            rgba(96, 165, 250, 0.16);
+            rgba(96,165,250,.16);
 
         color: #60a5fa;
 
-        font-size: 0.72rem;
+        font-size: .72rem;
         font-weight: 800;
 
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: .08em;
 
         margin-bottom: 1.1rem;
     }
@@ -118,21 +113,18 @@ html(
 
         color: #f8fafc;
 
-        font-size: clamp(
-            2.8rem,
-            6vw,
-            5rem
-        );
+        font-size:
+            clamp(2.8rem, 6vw, 5rem);
 
-        line-height: 0.98;
+        line-height: .98;
 
-        letter-spacing: -0.055em;
+        letter-spacing: -.055em;
 
         font-weight: 900;
     }
 
 
-    .hero-title .highlight {
+    .hero-highlight {
         background:
             linear-gradient(
                 90deg,
@@ -155,14 +147,12 @@ html(
         max-width: 650px;
 
         margin-top: 1.35rem;
-
-        margin-bottom: 0;
     }
 
 
-    /* ============================================
+    /* ==========================================
        CIRCUIT DECORATION
-       ============================================ */
+       ========================================== */
 
     .circuit-art {
         position: absolute;
@@ -170,8 +160,7 @@ html(
         right: 5%;
         top: 50%;
 
-        transform:
-            translateY(-50%);
+        transform: translateY(-50%);
 
         width: 250px;
         height: 250px;
@@ -180,11 +169,11 @@ html(
 
         border:
             1px solid
-            rgba(96, 165, 250, 0.14);
+            rgba(96,165,250,.14);
 
         box-shadow:
             0 0 80px
-            rgba(37, 99, 235, 0.10);
+            rgba(37,99,235,.10);
     }
 
 
@@ -193,8 +182,8 @@ html(
 
         position: absolute;
 
-        left: 18%;
-        right: 18%;
+        left: 15%;
+        right: 15%;
 
         top: 50%;
 
@@ -208,10 +197,6 @@ html(
                 #22d3ee,
                 transparent
             );
-
-        box-shadow:
-            0 0 12px
-            rgba(34, 211, 238, 0.45);
     }
 
 
@@ -247,7 +232,7 @@ html(
 
         box-shadow:
             0 0 20px
-            rgba(34, 211, 238, 0.9);
+            rgba(34,211,238,.9);
     }
 
 
@@ -263,9 +248,9 @@ html(
     }
 
 
-    /* ============================================
-       SECTION
-       ============================================ */
+    /* ==========================================
+       SECTIONS
+       ========================================== */
 
     .section {
         margin-top: 2.8rem;
@@ -275,15 +260,15 @@ html(
     .section-label {
         color: #60a5fa;
 
-        font-size: 0.7rem;
+        font-size: .7rem;
 
         font-weight: 800;
 
         text-transform: uppercase;
 
-        letter-spacing: 0.12em;
+        letter-spacing: .12em;
 
-        margin-bottom: 0.4rem;
+        margin-bottom: .4rem;
     }
 
 
@@ -294,9 +279,9 @@ html(
 
         font-weight: 850;
 
-        letter-spacing: -0.035em;
+        letter-spacing: -.035em;
 
-        margin-bottom: 0.4rem;
+        margin-bottom: .4rem;
     }
 
 
@@ -307,17 +292,16 @@ html(
 
         line-height: 1.65;
 
-        font-size: 0.95rem;
+        font-size: .95rem;
     }
 
 
-    /* ============================================
+    /* ==========================================
        FEATURE CARDS
-       ============================================ */
+       ========================================== */
 
     .feature-card {
         height: 100%;
-
         min-height: 190px;
 
         padding: 1.45rem;
@@ -327,20 +311,19 @@ html(
         background:
             linear-gradient(
                 145deg,
-                rgba(15, 23, 42, 0.95),
-                rgba(11, 23, 41, 0.90)
+                rgba(15,23,42,.95),
+                rgba(11,23,41,.90)
             );
 
         border:
             1px solid
-            rgba(148, 163, 184, 0.11);
+            rgba(148,163,184,.11);
     }
 
 
     .feature-icon {
         font-size: 1.65rem;
-
-        margin-bottom: 0.85rem;
+        margin-bottom: .85rem;
     }
 
 
@@ -351,25 +334,25 @@ html(
 
         font-weight: 750;
 
-        margin-bottom: 0.45rem;
+        margin-bottom: .45rem;
     }
 
 
     .feature-text {
         color: #94a3b8;
 
-        font-size: 0.84rem;
+        font-size: .84rem;
 
         line-height: 1.6;
     }
 
 
-    /* ============================================
+    /* ==========================================
        COURSE CARDS
-       ============================================ */
+       ========================================== */
 
     .course-card {
-        min-height: 210px;
+        min-height: 205px;
 
         padding: 1.35rem;
 
@@ -378,31 +361,30 @@ html(
         background:
             linear-gradient(
                 145deg,
-                rgba(15, 23, 42, 0.96),
-                rgba(11, 23, 41, 0.92)
+                rgba(15,23,42,.96),
+                rgba(11,23,41,.92)
             );
 
         border:
             1px solid
-            rgba(148, 163, 184, 0.11);
+            rgba(148,163,184,.11);
 
         transition:
-            transform 0.2s ease,
-            border-color 0.2s ease,
-            box-shadow 0.2s ease;
+            transform .2s ease,
+            border-color .2s ease,
+            box-shadow .2s ease;
     }
 
 
     .course-card:hover {
-        transform:
-            translateY(-3px);
+        transform: translateY(-3px);
 
         border-color:
-            rgba(96, 165, 250, 0.28);
+            rgba(96,165,250,.28);
 
         box-shadow:
             0 15px 40px
-            rgba(0, 0, 0, 0.18);
+            rgba(0,0,0,.18);
     }
 
 
@@ -418,7 +400,7 @@ html(
         border-radius: 12px;
 
         background:
-            rgba(37, 99, 235, 0.10);
+            rgba(37,99,235,.10);
 
         font-size: 1.35rem;
 
@@ -429,26 +411,26 @@ html(
     .course-title {
         color: #f8fafc;
 
-        font-size: 0.98rem;
+        font-size: .98rem;
 
         font-weight: 750;
 
-        margin-bottom: 0.45rem;
+        margin-bottom: .45rem;
     }
 
 
     .course-description {
         color: #94a3b8;
 
-        font-size: 0.81rem;
+        font-size: .81rem;
 
         line-height: 1.55;
     }
 
 
-    /* ============================================
+    /* ==========================================
        LEARNING PATH
-       ============================================ */
+       ========================================== */
 
     .path-card {
         padding: 1.35rem;
@@ -456,11 +438,11 @@ html(
         border-radius: 17px;
 
         background:
-            rgba(15, 23, 42, 0.78);
+            rgba(15,23,42,.78);
 
         border:
             1px solid
-            rgba(148, 163, 184, 0.11);
+            rgba(148,163,184,.11);
     }
 
 
@@ -497,7 +479,7 @@ html(
 
         color: white;
 
-        font-size: 0.78rem;
+        font-size: .78rem;
 
         font-weight: 800;
     }
@@ -506,7 +488,7 @@ html(
     .path-title {
         color: #e2e8f0;
 
-        font-size: 0.87rem;
+        font-size: .87rem;
 
         font-weight: 700;
     }
@@ -515,15 +497,15 @@ html(
     .path-description {
         color: #64748b;
 
-        font-size: 0.73rem;
+        font-size: .73rem;
 
         margin-top: 2px;
     }
 
 
-    /* ============================================
-       PHILOSOPHY CARD
-       ============================================ */
+    /* ==========================================
+       PHILOSOPHY
+       ========================================== */
 
     .philosophy {
         height: 100%;
@@ -535,20 +517,19 @@ html(
         background:
             radial-gradient(
                 circle at 90% 0%,
-                rgba(6, 182, 212, 0.10),
+                rgba(6,182,212,.10),
                 transparent 35%
             ),
-            rgba(15, 23, 42, 0.78);
+            rgba(15,23,42,.78);
 
         border:
             1px solid
-            rgba(96, 165, 250, 0.12);
+            rgba(96,165,250,.12);
     }
 
 
     .philosophy-icon {
         font-size: 2rem;
-
         margin-bottom: 1rem;
     }
 
@@ -560,14 +541,14 @@ html(
 
         font-weight: 800;
 
-        margin-bottom: 0.75rem;
+        margin-bottom: .75rem;
     }
 
 
     .philosophy-text {
         color: #94a3b8;
 
-        font-size: 0.87rem;
+        font-size: .87rem;
 
         line-height: 1.7;
     }
@@ -580,15 +561,15 @@ html(
 
         color: #60a5fa;
 
-        font-size: 0.85rem;
+        font-size: .85rem;
 
         font-weight: 800;
     }
 
 
-    /* ============================================
+    /* ==========================================
        CTA
-       ============================================ */
+       ========================================== */
 
     .cta {
         text-align: center;
@@ -602,14 +583,14 @@ html(
         background:
             radial-gradient(
                 circle at 50% 0%,
-                rgba(37, 99, 235, 0.20),
+                rgba(37,99,235,.20),
                 transparent 55%
             ),
             #0b1729;
 
         border:
             1px solid
-            rgba(96, 165, 250, 0.14);
+            rgba(96,165,250,.14);
     }
 
 
@@ -620,7 +601,7 @@ html(
 
         font-weight: 850;
 
-        letter-spacing: -0.035em;
+        letter-spacing: -.035em;
     }
 
 
@@ -629,18 +610,17 @@ html(
 
         max-width: 600px;
 
-        margin:
-            0.7rem auto 0;
+        margin: .7rem auto 0;
 
         line-height: 1.6;
 
-        font-size: 0.92rem;
+        font-size: .92rem;
     }
 
 
-    /* ============================================
+    /* ==========================================
        MOBILE
-       ============================================ */
+       ========================================== */
 
     @media (max-width: 850px) {
 
@@ -685,7 +665,9 @@ html(
             <h1 class="hero-title">
                 Electronics
                 <br>
-                <span class="highlight">made simple.</span>
+                <span class="hero-highlight">
+                    made simple.
+                </span>
             </h1>
 
             <p class="hero-description">
@@ -705,9 +687,11 @@ html(
 # HERO BUTTONS
 # ============================================================
 
-col1, col2 = st.columns(2)
+button_one, button_two = st.columns(2)
 
-with col1:
+
+with button_one:
+
     if st.button(
         "🚀  Start Learning",
         use_container_width=True,
@@ -716,7 +700,8 @@ with col1:
         st.switch_page("app_fundamentals.py")
 
 
-with col2:
+with button_two:
+
     if st.button(
         "🧪  Explore Circuit Analysis",
         use_container_width=True,
@@ -759,31 +744,32 @@ features = [
     (
         "📚",
         "Clear lessons",
-        "Complex electronics concepts explained in simple,
-        beginner-friendly language.",
+        "Complex electronics concepts explained in simple, "
+        "beginner-friendly language.",
     ),
     (
         "🧪",
         "Interactive learning",
-        "Explore circuits, calculations and electrical
-        principles instead of only reading about them.",
+        "Explore circuits, calculations and electrical "
+        "principles instead of only reading about them.",
     ),
     (
         "🧮",
         "Practical calculations",
-        "Apply Ohm's law, power, energy and circuit analysis
-        to real electrical problems.",
+        "Apply Ohm's law, power, energy and circuit analysis "
+        "to real electrical problems.",
     ),
     (
         "🧠",
         "Build confidence",
-        "Move from understanding the basics to solving
-        practical electronics problems.",
+        "Move from understanding the basics to solving "
+        "practical electronics problems.",
     ),
 ]
 
 
 feature_columns = st.columns(4)
+
 
 for column, feature in zip(feature_columns, features):
 
@@ -964,10 +950,10 @@ html(
 st.markdown("<br>", unsafe_allow_html=True)
 
 
-path_col, philosophy_col = st.columns([1.2, 1])
+path_column, philosophy_column = st.columns([1.2, 1])
 
 
-with path_col:
+with path_column:
 
     html(
         """
@@ -991,7 +977,6 @@ with path_col:
 
             </div>
 
-
             <div class="path-step">
 
                 <div class="path-number">
@@ -1009,7 +994,6 @@ with path_col:
                 </div>
 
             </div>
-
 
             <div class="path-step">
 
@@ -1029,7 +1013,6 @@ with path_col:
 
             </div>
 
-
             <div class="path-step">
 
                 <div class="path-number">
@@ -1047,7 +1030,6 @@ with path_col:
                 </div>
 
             </div>
-
 
             <div class="path-step">
 
@@ -1072,7 +1054,7 @@ with path_col:
     )
 
 
-with philosophy_col:
+with philosophy_column:
 
     html(
         """
@@ -1087,6 +1069,7 @@ with philosophy_col:
             </div>
 
             <div class="philosophy-text">
+
                 Don't just memorise that
                 <strong style="color:#e2e8f0;">
                     V = I × R
@@ -1103,6 +1086,7 @@ with philosophy_col:
 
                 The goal is to understand electronics
                 well enough to use it.
+
             </div>
 
             <div class="philosophy-highlight">
@@ -1115,7 +1099,7 @@ with philosophy_col:
 
 
 # ============================================================
-# FINAL CTA
+# CTA
 # ============================================================
 
 html(
@@ -1154,12 +1138,12 @@ if st.button(
 html(
     """
     <div style="
-        margin-top: 3rem;
-        padding-top: 1.4rem;
-        border-top: 1px solid rgba(148,163,184,.10);
-        text-align: center;
-        color: #475569;
-        font-size: .75rem;
+        margin-top:3rem;
+        padding-top:1.4rem;
+        border-top:1px solid rgba(148,163,184,.10);
+        text-align:center;
+        color:#475569;
+        font-size:.75rem;
     ">
 
         <strong style="color:#64748b;">
