@@ -1,179 +1,393 @@
-"""
-Electronics Learning Hub
-A single Streamlit application that combines all 8 topic modules into one
-app (one URL, one sidebar navigation menu):
-
-    1. Electrical Fundamentals
-    2. Electronic Components
-    3. Logic Gates
-    4. Digital Electronics
-    5. Circuit Analysis
-    6. Diodes & Rectifiers
-    7. Transistors & Amplifiers
-    8. Measurements & Instruments
-
-HOW THIS WORKS
---------------
-Streamlit's built-in multi-page navigation (`st.navigation` / `st.Page`,
-available in Streamlit >= 1.36) is used to stitch the 8 original,
-independent single-file apps together WITHOUT modifying their internal
-code. Each module keeps its own `st.set_page_config(...)` call — that is
-fine, because Streamlit only executes the ONE page script that is
-currently selected in the sidebar; the other 7 scripts are not run at
-the same time, so there is no "set_page_config called twice" conflict.
-
-This file (app.py) is the only entry point. It must be run with:
-
-    streamlit run app.py
-
-Do NOT run any of the files inside modules/ directly with `streamlit
-run` on their own if you want the combined experience — run app.py.
-"""
-
 from pathlib import Path
-
 import streamlit as st
 
-# ----------------------------------------------------------------------
-# Resolve module paths relative to THIS file's location on disk (not the
-# process's current working directory). Some deployment platforms
-# (Streamlit Community Cloud among them) can launch the app with a CWD
-# that differs from the repo root, which makes plain relative strings
-# like "modules/app_fundamentals.py" fail with:
-#   "Unable to create Page. The file `...` could not be found."
-# Anchoring to __file__ makes this work the same locally and deployed.
-# ----------------------------------------------------------------------
-BASE_DIR = Path(__file__).parent
 
-REQUIRED_MODULES = [
-    "home.py",
-    "app_fundamentals.py",
-    "app_components.py",
-    "app_gates.py",
-    "app_digital_electronics.py",
-    "app_circuit_analysis.py",
-    "app_rectifiers.py",
-    "app_amplifiers.py",
-    "app_measurements.py",
-]
+# ============================================================
+# ELECT4BEGINNERS — MAIN APPLICATION
+# ============================================================
 
-# Auto-detect where the module files actually live: prefer a modules/
-# subfolder, but fall back to the repo root if they were uploaded flat
-# (a common outcome of GitHub's web "Upload files" button, which can
-# flatten subfolder structure). This makes the app resilient to either
-# layout without needing another round-trip to fix the repo.
-_candidates = [BASE_DIR / "modules", BASE_DIR]
-MODULES_DIR = next(
-    (d for d in _candidates if all((d / m).is_file() for m in REQUIRED_MODULES)),
-    BASE_DIR / "modules",  # default guess if neither location is complete
+BASE_DIR = Path(__file__).resolve().parent
+
+
+# ------------------------------------------------------------
+# Page configuration
+# ------------------------------------------------------------
+
+st.set_page_config(
+    page_title="Elect4Beginners — Electronics Made Simple",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-missing = [m for m in REQUIRED_MODULES if not (MODULES_DIR / m).is_file()]
 
-if missing:
-    # Surface a clear, actionable diagnostic in the app itself instead of
-    # a bare stack trace. Both a modules/ subfolder and a flat repo-root
-    # layout were checked automatically — this only fires if NEITHER
-    # location has all 9 files.
-    st.error(
-        "Setup problem: one or more topic files are missing, so the app "
-        "can't build its navigation menu."
-    )
-    st.write(f"**Checked (in order):** `{_candidates[0]}`, `{_candidates[1]}`")
-    st.write(f"**Best-guess folder:** `{MODULES_DIR}`")
-    st.write(f"**Files found there:** {sorted(p.name for p in MODULES_DIR.iterdir()) if MODULES_DIR.is_dir() else '(folder does not exist)'}")
-    st.write(f"**Files found at repo root (`{BASE_DIR}`):** {sorted(p.name for p in BASE_DIR.iterdir())}")
-    st.write(f"**Still missing:** {missing}")
-    st.info(
-        "Fix: make sure all 9 files (home.py + the 8 app_*.py files) "
-        "exist together either in a `modules/` subfolder OR all together "
-        "at the repo root — exact lowercase names, no typos."
-    )
-    st.stop()
+# ------------------------------------------------------------
+# Global theme
+# ------------------------------------------------------------
 
-# ----------------------------------------------------------------------
-# Define every topic as a Page, plus a Home landing page. `title`/`icon`
-# feed the (now hidden) built-in nav; `url_path` makes each topic
-# deep-linkable, e.g. https://your-app-url/circuit_analysis
-# ----------------------------------------------------------------------
-home_page = st.Page(
-    str(MODULES_DIR / "home.py"),
-    title="Home",
-    icon="🏠",
-    default=True,
+st.markdown(
+    """
+    <style>
+
+    /* ==============================
+       GLOBAL
+       ============================== */
+
+    :root {
+        --navy: #07111f;
+        --navy-2: #0b1729;
+        --blue: #2563eb;
+        --cyan: #06b6d4;
+        --yellow: #fbbf24;
+        --green: #22c55e;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --border: rgba(148, 163, 184, 0.16);
+    }
+
+    .stApp {
+        background:
+            radial-gradient(
+                circle at 80% 5%,
+                rgba(37, 99, 235, 0.12),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 10% 30%,
+                rgba(6, 182, 212, 0.06),
+                transparent 25%
+            ),
+            #07111f;
+        color: var(--text);
+    }
+
+    .main {
+        background: transparent;
+    }
+
+    /* Remove excessive top padding */
+
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+        max-width: 1400px;
+    }
+
+
+    /* ==============================
+       SIDEBAR
+       ============================== */
+
+    section[data-testid="stSidebar"] {
+        background:
+            linear-gradient(
+                180deg,
+                #07111f 0%,
+                #0a1627 100%
+            );
+        border-right: 1px solid var(--border);
+    }
+
+    section[data-testid="stSidebar"] > div {
+        padding-top: 1.5rem;
+    }
+
+    section[data-testid="stSidebar"] .stMarkdown {
+        color: var(--text);
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stPageLink"] {
+        border-radius: 10px;
+        margin: 3px 0;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stPageLink"]:hover {
+        background: rgba(37, 99, 235, 0.14);
+    }
+
+
+    /* ==============================
+       BUTTONS
+       ============================== */
+
+    .stButton > button {
+        border-radius: 10px;
+        border: 1px solid rgba(96, 165, 250, 0.3);
+        background: linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+        color: white;
+        font-weight: 700;
+        padding: 0.65rem 1.2rem;
+        transition: all 0.2s ease;
+    }
+
+    .stButton > button:hover {
+        transform: translateY(-1px);
+        box-shadow:
+            0 10px 30px rgba(37, 99, 235, 0.25);
+        border-color: #60a5fa;
+    }
+
+
+    /* ==============================
+       LINKS
+       ============================== */
+
+    a {
+        color: #60a5fa !important;
+    }
+
+
+    /* ==============================
+       HEADINGS
+       ============================== */
+
+    h1, h2, h3 {
+        color: #f8fafc !important;
+    }
+
+    p {
+        color: #cbd5e1;
+    }
+
+
+    /* ==============================
+       METRICS
+       ============================== */
+
+    [data-testid="stMetric"] {
+        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1rem;
+    }
+
+
+    /* ==============================
+       DIVIDERS
+       ============================== */
+
+    hr {
+        border-color: rgba(148, 163, 184, 0.12);
+    }
+
+
+    /* ==============================
+       MOBILE
+       ============================== */
+
+    @media (max-width: 768px) {
+
+        .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem !important;
+        }
+
+        h2 {
+            font-size: 1.5rem !important;
+        }
+
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
 
-topic_pages = {
-    "fundamentals": st.Page(
-        str(MODULES_DIR / "app_fundamentals.py"),
+
+# ------------------------------------------------------------
+# Navigation
+# ------------------------------------------------------------
+
+pages = [
+    st.Page(
+        str(BASE_DIR / "home.py"),
+        title="Home",
+        icon="🏠",
+        url_path="home",
+        default=True,
+    ),
+
+    st.Page(
+        str(BASE_DIR / "app_fundamentals.py"),
         title="Electrical Fundamentals",
         icon="🔋",
         url_path="fundamentals",
     ),
-    "components": st.Page(
-        str(MODULES_DIR / "app_components.py"),
+
+    st.Page(
+        str(BASE_DIR / "app_components.py"),
         title="Electronic Components",
         icon="⚡",
         url_path="components",
     ),
-    "logic_gates": st.Page(
-        str(MODULES_DIR / "app_gates.py"),
+
+    st.Page(
+        str(BASE_DIR / "app_gates.py"),
         title="Logic Gates",
         icon="🔌",
-        url_path="logic_gates",
+        url_path="logic-gates",
     ),
-    "digital_electronics": st.Page(
-        str(MODULES_DIR / "app_digital_electronics.py"),
+
+    st.Page(
+        str(BASE_DIR / "app_digital_electronics.py"),
         title="Digital Electronics",
         icon="💾",
-        url_path="digital_electronics",
+        url_path="digital-electronics",
     ),
-    "circuit_analysis": st.Page(
-        str(MODULES_DIR / "app_circuit_analysis.py"),
+
+    st.Page(
+        str(BASE_DIR / "app_circuit_analysis.py"),
         title="Circuit Analysis",
         icon="🧮",
-        url_path="circuit_analysis",
+        url_path="circuit-analysis",
     ),
-    "rectifiers": st.Page(
-        str(MODULES_DIR / "app_rectifiers.py"),
+
+    st.Page(
+        str(BASE_DIR / "app_rectifiers.py"),
         title="Diodes & Rectifiers",
         icon="🔺",
         url_path="rectifiers",
     ),
-    "amplifiers": st.Page(
-        str(MODULES_DIR / "app_amplifiers.py"),
+
+    st.Page(
+        str(BASE_DIR / "app_amplifiers.py"),
         title="Transistors & Amplifiers",
         icon="🔀",
         url_path="amplifiers",
     ),
-    "measurements": st.Page(
-        str(MODULES_DIR / "app_measurements.py"),
+
+    st.Page(
+        str(BASE_DIR / "app_measurements.py"),
         title="Measurements & Instruments",
         icon="📏",
         url_path="measurements",
     ),
-}
+]
 
-# Stash the Page objects in session_state BEFORE navigation runs, so the
-# home page's "Start Learning" buttons can look them up and call
-# st.switch_page(...) on them (page identity, not just a path string).
-st.session_state["_pages_by_key"] = topic_pages
 
-pages = [home_page] + list(topic_pages.values())
-
-# Every page (including the ones you didn't touch) can still put its own
-# content in the sidebar the way it always did — we're only hiding
-# Streamlit's *automatic* page-list widget, not the sidebar itself.
-#
-# IMPORTANT ORDERING: this Home link is added AFTER nav.run(), not
-# before. Each page script's first command must be its own
-# st.set_page_config() call — anything st.* rendered in app.py before
-# nav.run() would break that rule and crash every page. Adding it after
-# nav.run() means it renders at the bottom of whatever sidebar content
-# that page already built, which is a safe trade-off.
-nav = st.navigation(pages, position="hidden")
-nav.run()
+# ------------------------------------------------------------
+# Sidebar branding
+# ------------------------------------------------------------
 
 with st.sidebar:
-    st.divider()
-    st.page_link(home_page, label="🏠 Hub Home")
+
+    st.markdown(
+        """
+        <div style="
+            padding: 0.5rem 0.3rem 1.2rem 0.3rem;
+        ">
+
+            <div style="
+                display:flex;
+                align-items:center;
+                gap:10px;
+            ">
+
+                <div style="
+                    width:42px;
+                    height:42px;
+                    border-radius:12px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    background:
+                        linear-gradient(
+                            135deg,
+                            #2563eb,
+                            #06b6d4
+                        );
+                    font-size:23px;
+                    box-shadow:
+                        0 8px 25px
+                        rgba(37,99,235,.25);
+                ">
+                    ⚡
+                </div>
+
+                <div>
+                    <div style="
+                        color:#f8fafc;
+                        font-size:1.05rem;
+                        font-weight:800;
+                        letter-spacing:-.02em;
+                    ">
+                        Elect4Beginners
+                    </div>
+
+                    <div style="
+                        color:#64748b;
+                        font-size:.72rem;
+                        margin-top:2px;
+                    ">
+                        Electronics made simple
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.caption("LEARNING")
+
+    st.markdown(
+        """
+        <div style="
+            margin-top:1.5rem;
+            padding:1rem;
+            border-radius:12px;
+            background:rgba(37,99,235,.08);
+            border:1px solid rgba(96,165,250,.12);
+        ">
+            <div style="
+                color:#94a3b8;
+                font-size:.72rem;
+                text-transform:uppercase;
+                letter-spacing:.08em;
+                margin-bottom:.35rem;
+            ">
+                Your journey
+            </div>
+
+            <div style="
+                color:#f8fafc;
+                font-size:.95rem;
+                font-weight:700;
+            ">
+                Start with the fundamentals
+            </div>
+
+            <div style="
+                color:#64748b;
+                font-size:.78rem;
+                margin-top:.35rem;
+            ">
+                Build your electronics knowledge step by step.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("---")
+
+    st.caption("ELECT4BEGINNERS")
+    st.caption("Learn • Experiment • Understand")
+
+
+# ------------------------------------------------------------
+# Run application
+# ------------------------------------------------------------
+
+nav = st.navigation(pages, position="sidebar")
+nav.run()
