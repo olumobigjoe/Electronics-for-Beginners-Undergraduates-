@@ -102,49 +102,49 @@ home_page = st.Page(
 
 topic_pages = {
     "fundamentals": st.Page(
-        str(MODULES_DIR / "app_fundamentals.py"),
+        str("app_fundamentals.py"),
         title="Electrical Fundamentals",
         icon="🔋",
         url_path="fundamentals",
     ),
     "components": st.Page(
-        str(MODULES_DIR / "app_components.py"),
+        str( "app_components.py"),
         title="Electronic Components",
         icon="⚡",
         url_path="components",
     ),
     "logic_gates": st.Page(
-        str(MODULES_DIR / "app_gates.py"),
+        str("app_gates.py"),
         title="Logic Gates",
         icon="🔌",
         url_path="logic_gates",
     ),
     "digital_electronics": st.Page(
-        str(MODULES_DIR / "app_digital_electronics.py"),
+        str("app_digital_electronics.py"),
         title="Digital Electronics",
         icon="💾",
         url_path="digital_electronics",
     ),
     "circuit_analysis": st.Page(
-        str(MODULES_DIR / "app_circuit_analysis.py"),
+        str("app_circuit_analysis.py"),
         title="Circuit Analysis",
         icon="🧮",
         url_path="circuit_analysis",
     ),
     "rectifiers": st.Page(
-        str(MODULES_DIR / "app_rectifiers.py"),
+        str("app_rectifiers.py"),
         title="Diodes & Rectifiers",
         icon="🔺",
         url_path="rectifiers",
     ),
     "amplifiers": st.Page(
-        str(MODULES_DIR / "app_amplifiers.py"),
+        str("app_amplifiers.py"),
         title="Transistors & Amplifiers",
         icon="🔀",
         url_path="amplifiers",
     ),
     "measurements": st.Page(
-        str(MODULES_DIR / "app_measurements.py"),
+        str("app_measurements.py"),
         title="Measurements & Instruments",
         icon="📏",
         url_path="measurements",
