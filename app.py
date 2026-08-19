@@ -44,9 +44,9 @@ import streamlit as st
 # Anchoring to __file__ makes this work the same locally and deployed.
 # ----------------------------------------------------------------------
 BASE_DIR = Path(__file__).parent
-MODULES_DIR = BASE_DIR / "modules"
 
 REQUIRED_MODULES = [
+    "home.py",
     "app_fundamentals.py",
     "app_components.py",
     "app_gates.py",
@@ -57,34 +57,37 @@ REQUIRED_MODULES = [
     "app_measurements.py",
 ]
 
+# Auto-detect where the module files actually live: prefer a modules/
+# subfolder, but fall back to the repo root if they were uploaded flat
+# (a common outcome of GitHub's web "Upload files" button, which can
+# flatten subfolder structure). This makes the app resilient to either
+# layout without needing another round-trip to fix the repo.
+_candidates = [BASE_DIR / "modules", BASE_DIR]
+MODULES_DIR = next(
+    (d for d in _candidates if all((d / m).is_file() for m in REQUIRED_MODULES)),
+    BASE_DIR / "modules",  # default guess if neither location is complete
+)
+
 missing = [m for m in REQUIRED_MODULES if not (MODULES_DIR / m).is_file()]
 
 if missing:
     # Surface a clear, actionable diagnostic in the app itself instead of
-    # a bare stack trace. This tells you exactly what Streamlit Cloud
-    # actually sees on disk, which is the fastest way to tell whether the
-    # `modules/` folder made it into the deployed repo at all.
+    # a bare stack trace. Both a modules/ subfolder and a flat repo-root
+    # layout were checked automatically — this only fires if NEITHER
+    # location has all 9 files.
     st.error(
         "Setup problem: one or more topic files are missing, so the app "
         "can't build its navigation menu."
     )
-    st.write(f"**Expected folder:** `{MODULES_DIR}`")
-    st.write(f"**Folder exists:** {MODULES_DIR.is_dir()}")
-    if MODULES_DIR.is_dir():
-        found = sorted(p.name for p in MODULES_DIR.iterdir())
-        st.write(f"**Files actually found in `modules/`:** {found or '(empty)'}")
-    else:
-        st.write(f"**Files found in app root (`{BASE_DIR}`):**")
-        st.write(sorted(p.name for p in BASE_DIR.iterdir()))
-    st.write(f"**Missing:** {missing}")
+    st.write(f"**Checked (in order):** `{_candidates[0]}`, `{_candidates[1]}`")
+    st.write(f"**Best-guess folder:** `{MODULES_DIR}`")
+    st.write(f"**Files found there:** {sorted(p.name for p in MODULES_DIR.iterdir()) if MODULES_DIR.is_dir() else '(folder does not exist)'}")
+    st.write(f"**Files found at repo root (`{BASE_DIR}`):** {sorted(p.name for p in BASE_DIR.iterdir())}")
+    st.write(f"**Still missing:** {missing}")
     st.info(
-        "Fix: open your GitHub repo in the browser and confirm there is a "
-        "`modules/` folder at the repo root containing these 8 files "
-        "(exact names, lowercase). If it's not there, the folder was "
-        "never pushed / got flattened during upload — re-add it and "
-        "redeploy. If it IS there but this still fails, check for a "
-        "`.gitignore` rule or nested extra folder (e.g. "
-        "`elect_4_beginners/modules/` inside `modules/`)."
+        "Fix: make sure all 9 files (home.py + the 8 app_*.py files) "
+        "exist together either in a `modules/` subfolder OR all together "
+        "at the repo root — exact lowercase names, no typos."
     )
     st.stop()
 
