@@ -94,7 +94,7 @@ if missing:
 # deep-linkable, e.g. https://your-app-url/circuit_analysis
 # ----------------------------------------------------------------------
 home_page = st.Page(
-    str(MODULES_DIR / "home.py"),
+    str("home.py"),
     title="Home",
     icon="🏠",
     default=True,
