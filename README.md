@@ -1,155 +1,124 @@
-# ⚡ Electronics for Beginners
+# Electronics Learning Hub
 
-## Master Portal for Interactive Electronics Learning
+A single Streamlit application that combines **8 interactive learning labs**
+into one app, reachable at **one URL**, with a sidebar menu to switch
+between topics:
 
-**Electronics for Beginners** is a central Streamlit landing page that brings eight independent live electronics learning laboratories together under **one master URL**.
+| # | Topic | Icon |
+|---|-------|------|
+| 1 | Electrical Fundamentals | 🔋 |
+| 2 | Electronic Components | ⚡ |
+| 3 | Logic Gates | 🔌 |
+| 4 | Digital Electronics | 💾 |
+| 5 | Circuit Analysis | 🧮 |
+| 6 | Diodes & Rectifiers | 🔺 |
+| 7 | Transistors & Amplifiers | 🔀 |
+| 8 | Measurements & Instruments | 📏 |
 
-The individual projects remain separate applications. This portal provides students with one starting point and clickable topic cards that open each live laboratory.
+Built for first-year undergraduate Physics / Electronics students. No
+external APIs, databases, or internet services are used — only
+`streamlit`, `pandas`, and `matplotlib`.
 
-## 🌐 Live Learning Laboratories
+## Navigation
 
-| Module | Live Application |
-|---|---|
-| 🔧 Electronic Components | https://intro-to-electronic-components.streamlit.app/ |
-| 📏 Measurements & Instrumentation | https://electronic-measurements-and-instrumentation.streamlit.app/ |
-| ⚡ Electrical Fundamentals | https://electrical-fundamentals.streamlit.app/ |
-| 🔌 Diodes & Rectifiers | https://diodes-rectifiers.streamlit.app/ |
-| 🔬 Transistors & Amplifiers | https://transistors-and-amplifiers.streamlit.app/ |
-| 💡 Logic Gates | https://logic-gates-lab.streamlit.app/ |
-| 🧮 Circuit Analysis | https://circuit-analysis.streamlit.app/ |
-| 💻 Digital Electronics | https://digital-electronics-for-beginners.streamlit.app/ |
+The app opens on a **card-grid landing page** (not a plain sidebar
+list) — each topic gets an icon, a level badge, a short blurb, and a
+"Start Learning" button that jumps straight into that module. A small
+"🏠 Hub Home" link is added to the bottom of every topic page's
+sidebar so you can get back to the grid without hunting for a browser
+back button.
 
-## 🎓 Recommended Learning Path
+## Project structure
 
-1. Electrical Fundamentals
-2. Electronic Components
-3. Measurements & Instrumentation
-4. Circuit Analysis
-5. Diodes & Rectifiers
-6. Transistors & Amplifiers
-7. Logic Gates
-8. Digital Electronics
-
-## ✨ Features
-
-- One central landing page
-- Eight learning modules
-- Eight live Streamlit applications
-- Clickable square learning cards
-- Direct access to each laboratory
-- Recommended learning path
-- Modern electronics-themed interface
-- Responsive desktop, tablet and mobile layout
-
-## 🛠️ Technology
-
-- Python
-- Streamlit
-- HTML
-- CSS
-
-## 📁 Project Structure
-
-```text
-Electronics-for-Beginners/
-├── app.py
+```
+electronics_learning_hub/
+├── app.py                          # entry point — RUN THIS ONE
 ├── requirements.txt
-└── README.md
+├── README.md
+├── modules/
+    ├── home.py                     # card-grid landing page
+    ├── app_fundamentals.py
+    ├── app_components.py
+    ├── app_gates.py
+    ├── app_digital_electronics.py
+    ├── app_circuit_analysis.py
+    ├── app_rectifiers.py
+    ├── app_amplifiers.py
+    └── app_measurements.py
 ```
 
-## 💻 Run Locally
+`app.py` uses Streamlit's built-in multi-page navigation
+(`st.navigation` / `st.Page`) to stitch the 8 original, independently
+built apps together **without modifying any of their internal code**.
+Each module keeps its own `st.set_page_config(...)` call — that's safe
+because Streamlit only ever executes the *one* page script currently
+selected in the sidebar, never all 8 at once.
 
-### Windows
+Each topic also gets its own URL slug, so pages are directly linkable,
+e.g.:
 
-```bash
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-streamlit run app.py
+```
+https://your-app-url/circuit_analysis
+https://your-app-url/amplifiers
 ```
 
-### macOS / Linux
+## Running locally
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-streamlit run app.py
-```
+1. **Install dependencies** (Python 3.9+ recommended):
 
-## ☁️ Deploying the Master Portal
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-1. Create a GitHub repository named `Electronics-for-Beginners`.
-2. Upload `app.py`, `requirements.txt`, and `README.md`.
-3. Connect the repository to Streamlit Community Cloud.
-4. Select `app.py` as the main file.
-5. Deploy.
+2. **Run the combined app** (always run `app.py`, not the files inside
+   `modules/`):
 
-Streamlit will generate the master portal URL. For example:
+   ```bash
+   streamlit run app.py
+   ```
 
-```text
-https://electronics-for-beginners.streamlit.app/
-```
+3. Streamlit will print a local URL (typically
+   `http://localhost:8501`) — open it in your browser. Use the sidebar
+   to jump between all 8 topics.
 
-The exact URL depends on the deployment name you select.
+## Deploying to get one public URL
 
-## 🔗 How It Works
+Any Streamlit-compatible host works. The easiest free option is
+**Streamlit Community Cloud**:
 
-The master application does **not** merge the source code of the eight projects.
+1. Push this whole folder to a GitHub repository (keep the
+   `modules/` subfolder structure intact).
+2. Go to [share.streamlit.io](https://share.streamlit.io), sign in,
+   and click "New app".
+3. Point it at your repo, and set:
+   - **Main file path:** `app.py`
+4. Deploy. You'll get a single public URL
+   (`https://<your-app-name>.streamlit.app`) that serves all 8 topics
+   through the sidebar navigation.
 
-Instead:
+Other options (Render, Railway, Hugging Face Spaces, an internal
+server, etc.) work the same way — the only requirement is that the
+process is started with `streamlit run app.py` and the `modules/`
+folder is deployed alongside it.
 
-```text
-MASTER PORTAL
-    │
-    ├── Electronic Components
-    │       └── Live Components App
-    ├── Measurements & Instrumentation
-    │       └── Live Measurements App
-    ├── Electrical Fundamentals
-    │       └── Live Fundamentals App
-    ├── Diodes & Rectifiers
-    │       └── Live Diodes App
-    ├── Transistors & Amplifiers
-    │       └── Live Transistors App
-    ├── Logic Gates
-    │       └── Live Logic Gates App
-    ├── Circuit Analysis
-    │       └── Live Circuit Analysis App
-    └── Digital Electronics
-            └── Live Digital Electronics App
-```
+## Notes / troubleshooting
 
-Each project can therefore continue to be developed independently.
-
-## 🔮 Future Development
-
-The portal can later become a complete electronics education platform with:
-
-- Structured courses
-- Interactive lessons
-- Virtual electronics laboratories
-- Circuit simulation
-- Electronics calculators
-- Quizzes
-- Practice examinations
-- AI Electronics Tutor
-- Student progress tracking
-- Student dashboard
-- Lecturer dashboard
-- Achievements
-- Certificates
-- Mobile application
-- Progressive Web App
-
-## 🎯 Vision
-
-The long-term goal is to combine:
-
-**COURSES + INTERACTIVE LABS + CIRCUIT SIMULATION + QUIZZES + AI TUTOR + PROGRESS TRACKING + CERTIFICATES**
-
-into one complete electronics learning ecosystem.
-
-## ⚡ Electronics for Beginners
-
-### Learn • Explore • Simulate • Practice • Master
+- **"Unable to create Page. The file `...` could not be found."** — this
+  means the platform's working directory isn't the repo root when it
+  launches `app.py`. `app.py` now resolves `modules/*.py` as absolute
+  paths anchored to its own file location (via `Path(__file__).parent`),
+  which fixes this regardless of CWD. If you still hit it after
+  updating, double-check that the `modules/` folder was actually pushed
+  to your GitHub repo (browse the repo on GitHub.com and confirm the 8
+  files are visible there) and that on Streamlit Community Cloud the
+  **Main file path** is set to `app.py` (not `modules/app.py` or
+  anything else).
+- **Always launch via `app.py`.** Running e.g.
+  `streamlit run modules/app_gates.py` directly will still work as a
+  standalone app, but you'll lose the combined navigation and the
+  single shared URL.
+- If you add a 9th topic later, drop the new file into `modules/` and
+  add one more `st.Page(...)` entry to the `pages` list in `app.py`.
+- Requires Streamlit **1.36 or newer** (for `st.navigation`/`st.Page`).
+  If your platform pins an older Streamlit version, bump it via
+  `requirements.txt`.
