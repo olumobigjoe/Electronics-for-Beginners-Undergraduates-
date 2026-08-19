@@ -1,5 +1,3 @@
-from textwrap import dedent
-
 import streamlit as st
 
 
@@ -8,689 +6,628 @@ import streamlit as st
 # ============================================================
 
 st.set_page_config(
-    page_title="Elect4Beginners — Electronics Made Simple",
+    page_title="Elect4Beginners | Electronics Made Simple",
     page_icon="⚡",
     layout="wide",
 )
 
 
 # ============================================================
-# HTML HELPER
+# GLOBAL HOME PAGE CSS
 # ============================================================
 
-def html(content):
-    st.markdown(
-        dedent(content),
-        unsafe_allow_html=True,
-    )
+st.html("""
+<style>
+
+html, body {
+    background: #07111f !important;
+}
+
+.stApp {
+    background:
+        radial-gradient(
+            circle at 85% 5%,
+            rgba(6, 182, 212, 0.10),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 5% 35%,
+            rgba(37, 99, 235, 0.10),
+            transparent 30%
+        ),
+        #07111f !important;
+}
+
+.block-container {
+    max-width: 1400px;
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
+}
 
 
-# ============================================================
-# PAGE CSS
-# ============================================================
+/* ==========================================
+   HERO
+   ========================================== */
 
-html(
-    """
-    <style>
+.hero {
+    position: relative;
+    overflow: hidden;
 
-    /* ==========================================
-       HERO
-       ========================================== */
+    padding: 4rem 3.5rem;
+
+    border-radius: 28px;
+
+    background:
+        radial-gradient(
+            circle at 85% 35%,
+            rgba(34, 211, 238, 0.14),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 15% 100%,
+            rgba(37, 99, 235, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #0d1b30,
+            #07111f
+        );
+
+    border: 1px solid rgba(96, 165, 250, 0.16);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 720px;
+}
+
+
+.eyebrow {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: rgba(37, 99, 235, 0.12);
+
+    border: 1px solid rgba(96, 165, 250, 0.18);
+
+    color: #60a5fa;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+.hero-title {
+    margin: 1.2rem 0 0 0;
+
+    color: #f8fafc;
+
+    font-size: clamp(3rem, 6vw, 5.2rem);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 900;
+}
+
+
+.hero-highlight {
+    background:
+        linear-gradient(
+            90deg,
+            #60a5fa,
+            #22d3ee
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+.hero-description {
+    margin-top: 1.5rem;
+
+    max-width: 650px;
+
+    color: #94a3b8;
+
+    font-size: 1.08rem;
+
+    line-height: 1.75;
+}
+
+
+/* ==========================================
+   CIRCUIT GRAPHIC
+   ========================================== */
+
+.circuit {
+    position: absolute;
+
+    right: 7%;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(96, 165, 250, 0.14);
+
+    box-shadow:
+        0 0 90px rgba(37, 99, 235, 0.10);
+}
+
+
+.circuit-line {
+    position: absolute;
+
+    left: 10%;
+    right: 10%;
+
+    top: 50%;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #2563eb,
+            #22d3ee,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px rgba(34, 211, 238, 0.5);
+}
+
+
+.circuit-text {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #60a5fa;
+
+    font-size: 1.35rem;
+
+    font-weight: 800;
+}
+
+
+.dot {
+    position: absolute;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    background: #22d3ee;
+
+    box-shadow:
+        0 0 20px rgba(34, 211, 238, 0.9);
+}
+
+
+.dot-one {
+    top: 35px;
+    right: 45px;
+}
+
+
+.dot-two {
+    bottom: 35px;
+    left: 45px;
+}
+
+
+/* ==========================================
+   SECTION HEADINGS
+   ========================================== */
+
+.section {
+    margin-top: 3rem;
+}
+
+
+.section-label {
+    color: #60a5fa;
+
+    font-size: 0.7rem;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12em;
+}
+
+
+.section-title {
+    margin-top: 0.45rem;
+
+    color: #f8fafc;
+
+    font-size: 2rem;
+
+    font-weight: 850;
+
+    letter-spacing: -0.04em;
+}
+
+
+.section-description {
+    margin-top: 0.5rem;
+
+    max-width: 700px;
+
+    color: #94a3b8;
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================
+   CARDS
+   ========================================== */
+
+.card {
+    min-height: 190px;
+
+    padding: 1.5rem;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(11, 23, 41, 0.92)
+        );
+
+    border:
+        1px solid rgba(148, 163, 184, 0.11);
+}
+
+
+.card-icon {
+    font-size: 1.7rem;
+
+    margin-bottom: 1rem;
+}
+
+
+.card-title {
+    color: #f8fafc;
+
+    font-size: 1rem;
+
+    font-weight: 750;
+
+    margin-bottom: 0.5rem;
+}
+
+
+.card-text {
+    color: #94a3b8;
+
+    font-size: 0.84rem;
+
+    line-height: 1.65;
+}
+
+
+/* ==========================================
+   COURSE CARD
+   ========================================== */
+
+.course {
+    min-height: 205px;
+
+    padding: 1.35rem;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(11, 23, 41, 0.92)
+        );
+
+    border:
+        1px solid rgba(148, 163, 184, 0.11);
+}
+
+
+.course-icon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(37, 99, 235, 0.11);
+
+    font-size: 1.4rem;
+
+    margin-bottom: 1rem;
+}
+
+
+.course-title {
+    color: #f8fafc;
+
+    font-size: 0.98rem;
+
+    font-weight: 750;
+
+    margin-bottom: 0.5rem;
+}
+
+
+.course-text {
+    color: #94a3b8;
+
+    font-size: 0.81rem;
+
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   LEARNING PATH
+   ========================================== */
+
+.path {
+    padding: 1.5rem;
+
+    border-radius: 18px;
+
+    background:
+        rgba(15, 23, 42, 0.8);
+
+    border:
+        1px solid rgba(148, 163, 184, 0.11);
+}
+
+
+.path-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px 0;
+}
+
+
+.path-number {
+    width: 36px;
+    height: 36px;
+
+    flex: 0 0 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+
+    color: white;
+
+    font-weight: 800;
+
+    font-size: 0.78rem;
+}
+
+
+.path-name {
+    color: #e2e8f0;
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+}
+
+
+.path-small {
+    color: #64748b;
+
+    font-size: 0.73rem;
+
+    margin-top: 2px;
+}
+
+
+/* ==========================================
+   CTA
+   ========================================== */
+
+.cta {
+    margin-top: 3rem;
+
+    padding: 3.5rem 2rem;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(37, 99, 235, 0.22),
+            transparent 55%
+        ),
+        #0b1729;
+
+    border:
+        1px solid rgba(96, 165, 250, 0.14);
+}
+
+
+.cta-title {
+    color: #f8fafc;
+
+    font-size: 2rem;
+
+    font-weight: 850;
+
+    letter-spacing: -0.04em;
+}
+
+
+.cta-text {
+    max-width: 600px;
+
+    margin: 0.7rem auto 0;
+
+    color: #94a3b8;
+
+    line-height: 1.65;
+}
+
+
+.footer {
+    margin-top: 3rem;
+
+    padding-top: 1.5rem;
+
+    border-top:
+        1px solid rgba(148, 163, 184, 0.10);
+
+    text-align: center;
+
+    color: #475569;
+
+    font-size: 0.75rem;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 850px) {
 
     .hero {
-        position: relative;
-        overflow: hidden;
-
-        padding: 3.6rem 3.2rem;
-
-        border-radius: 26px;
-
-        margin-bottom: 1.2rem;
-
-        background:
-            radial-gradient(
-                circle at 85% 25%,
-                rgba(6,182,212,.15),
-                transparent 25%
-            ),
-            radial-gradient(
-                circle at 15% 90%,
-                rgba(37,99,235,.18),
-                transparent 30%
-            ),
-            linear-gradient(
-                135deg,
-                #0b1729,
-                #07111f
-            );
-
-        border:
-            1px solid
-            rgba(96,165,250,.16);
-
-        box-shadow:
-            0 25px 70px
-            rgba(0,0,0,.22);
+        padding: 2.5rem 1.5rem;
     }
 
-
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 720px;
+    .circuit {
+        display: none;
     }
-
-
-    .eyebrow {
-        display: inline-flex;
-        align-items: center;
-
-        padding: 7px 12px;
-
-        border-radius: 999px;
-
-        background:
-            rgba(37,99,235,.10);
-
-        border:
-            1px solid
-            rgba(96,165,250,.16);
-
-        color: #60a5fa;
-
-        font-size: .72rem;
-        font-weight: 800;
-
-        text-transform: uppercase;
-        letter-spacing: .08em;
-
-        margin-bottom: 1.1rem;
-    }
-
 
     .hero-title {
-        margin: 0;
-
-        color: #f8fafc;
-
-        font-size:
-            clamp(2.8rem, 6vw, 5rem);
-
-        line-height: .98;
-
-        letter-spacing: -.055em;
-
-        font-weight: 900;
+        font-size: 3rem;
     }
 
+}
 
-    .hero-highlight {
-        background:
-            linear-gradient(
-                90deg,
-                #60a5fa,
-                #22d3ee
-            );
-
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-
-    .hero-description {
-        color: #94a3b8;
-
-        font-size: 1.08rem;
-
-        line-height: 1.7;
-
-        max-width: 650px;
-
-        margin-top: 1.35rem;
-    }
-
-
-    /* ==========================================
-       CIRCUIT DECORATION
-       ========================================== */
-
-    .circuit-art {
-        position: absolute;
-
-        right: 5%;
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        width: 250px;
-        height: 250px;
-
-        border-radius: 50%;
-
-        border:
-            1px solid
-            rgba(96,165,250,.14);
-
-        box-shadow:
-            0 0 80px
-            rgba(37,99,235,.10);
-    }
-
-
-    .circuit-art::before {
-        content: "";
-
-        position: absolute;
-
-        left: 15%;
-        right: 15%;
-
-        top: 50%;
-
-        height: 2px;
-
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                #2563eb,
-                #22d3ee,
-                transparent
-            );
-    }
-
-
-    .circuit-art::after {
-        content: "V = I × R";
-
-        position: absolute;
-
-        inset: 0;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        color: #60a5fa;
-
-        font-size: 1.35rem;
-
-        font-weight: 800;
-    }
-
-
-    .circuit-dot {
-        position: absolute;
-
-        width: 10px;
-        height: 10px;
-
-        border-radius: 50%;
-
-        background: #22d3ee;
-
-        box-shadow:
-            0 0 20px
-            rgba(34,211,238,.9);
-    }
-
-
-    .dot-one {
-        top: 28px;
-        right: 45px;
-    }
-
-
-    .dot-two {
-        bottom: 42px;
-        left: 38px;
-    }
-
-
-    /* ==========================================
-       SECTIONS
-       ========================================== */
-
-    .section {
-        margin-top: 2.8rem;
-    }
-
-
-    .section-label {
-        color: #60a5fa;
-
-        font-size: .7rem;
-
-        font-weight: 800;
-
-        text-transform: uppercase;
-
-        letter-spacing: .12em;
-
-        margin-bottom: .4rem;
-    }
-
-
-    .section-title {
-        color: #f8fafc;
-
-        font-size: 1.9rem;
-
-        font-weight: 850;
-
-        letter-spacing: -.035em;
-
-        margin-bottom: .4rem;
-    }
-
-
-    .section-description {
-        color: #94a3b8;
-
-        max-width: 680px;
-
-        line-height: 1.65;
-
-        font-size: .95rem;
-    }
-
-
-    /* ==========================================
-       FEATURE CARDS
-       ========================================== */
-
-    .feature-card {
-        height: 100%;
-        min-height: 190px;
-
-        padding: 1.45rem;
-
-        border-radius: 17px;
-
-        background:
-            linear-gradient(
-                145deg,
-                rgba(15,23,42,.95),
-                rgba(11,23,41,.90)
-            );
-
-        border:
-            1px solid
-            rgba(148,163,184,.11);
-    }
-
-
-    .feature-icon {
-        font-size: 1.65rem;
-        margin-bottom: .85rem;
-    }
-
-
-    .feature-title {
-        color: #f8fafc;
-
-        font-size: 1rem;
-
-        font-weight: 750;
-
-        margin-bottom: .45rem;
-    }
-
-
-    .feature-text {
-        color: #94a3b8;
-
-        font-size: .84rem;
-
-        line-height: 1.6;
-    }
-
-
-    /* ==========================================
-       COURSE CARDS
-       ========================================== */
-
-    .course-card {
-        min-height: 205px;
-
-        padding: 1.35rem;
-
-        border-radius: 17px;
-
-        background:
-            linear-gradient(
-                145deg,
-                rgba(15,23,42,.96),
-                rgba(11,23,41,.92)
-            );
-
-        border:
-            1px solid
-            rgba(148,163,184,.11);
-
-        transition:
-            transform .2s ease,
-            border-color .2s ease,
-            box-shadow .2s ease;
-    }
-
-
-    .course-card:hover {
-        transform: translateY(-3px);
-
-        border-color:
-            rgba(96,165,250,.28);
-
-        box-shadow:
-            0 15px 40px
-            rgba(0,0,0,.18);
-    }
-
-
-    .course-icon {
-        width: 44px;
-        height: 44px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 12px;
-
-        background:
-            rgba(37,99,235,.10);
-
-        font-size: 1.35rem;
-
-        margin-bottom: 1rem;
-    }
-
-
-    .course-title {
-        color: #f8fafc;
-
-        font-size: .98rem;
-
-        font-weight: 750;
-
-        margin-bottom: .45rem;
-    }
-
-
-    .course-description {
-        color: #94a3b8;
-
-        font-size: .81rem;
-
-        line-height: 1.55;
-    }
-
-
-    /* ==========================================
-       LEARNING PATH
-       ========================================== */
-
-    .path-card {
-        padding: 1.35rem;
-
-        border-radius: 17px;
-
-        background:
-            rgba(15,23,42,.78);
-
-        border:
-            1px solid
-            rgba(148,163,184,.11);
-    }
-
-
-    .path-step {
-        display: flex;
-
-        align-items: center;
-
-        gap: 12px;
-
-        padding: 10px 0;
-    }
-
-
-    .path-number {
-        width: 34px;
-        height: 34px;
-
-        flex: 0 0 34px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 50%;
-
-        background:
-            linear-gradient(
-                135deg,
-                #2563eb,
-                #06b6d4
-            );
-
-        color: white;
-
-        font-size: .78rem;
-
-        font-weight: 800;
-    }
-
-
-    .path-title {
-        color: #e2e8f0;
-
-        font-size: .87rem;
-
-        font-weight: 700;
-    }
-
-
-    .path-description {
-        color: #64748b;
-
-        font-size: .73rem;
-
-        margin-top: 2px;
-    }
-
-
-    /* ==========================================
-       PHILOSOPHY
-       ========================================== */
-
-    .philosophy {
-        height: 100%;
-
-        padding: 1.7rem;
-
-        border-radius: 17px;
-
-        background:
-            radial-gradient(
-                circle at 90% 0%,
-                rgba(6,182,212,.10),
-                transparent 35%
-            ),
-            rgba(15,23,42,.78);
-
-        border:
-            1px solid
-            rgba(96,165,250,.12);
-    }
-
-
-    .philosophy-icon {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-
-
-    .philosophy-title {
-        color: #f8fafc;
-
-        font-size: 1.05rem;
-
-        font-weight: 800;
-
-        margin-bottom: .75rem;
-    }
-
-
-    .philosophy-text {
-        color: #94a3b8;
-
-        font-size: .87rem;
-
-        line-height: 1.7;
-    }
-
-
-    .philosophy-highlight {
-        display: inline-block;
-
-        margin-top: 1rem;
-
-        color: #60a5fa;
-
-        font-size: .85rem;
-
-        font-weight: 800;
-    }
-
-
-    /* ==========================================
-       CTA
-       ========================================== */
-
-    .cta {
-        text-align: center;
-
-        padding: 3rem 1.5rem;
-
-        margin-top: 3rem;
-
-        border-radius: 22px;
-
-        background:
-            radial-gradient(
-                circle at 50% 0%,
-                rgba(37,99,235,.20),
-                transparent 55%
-            ),
-            #0b1729;
-
-        border:
-            1px solid
-            rgba(96,165,250,.14);
-    }
-
-
-    .cta-title {
-        color: #f8fafc;
-
-        font-size: 1.85rem;
-
-        font-weight: 850;
-
-        letter-spacing: -.035em;
-    }
-
-
-    .cta-text {
-        color: #94a3b8;
-
-        max-width: 600px;
-
-        margin: .7rem auto 0;
-
-        line-height: 1.6;
-
-        font-size: .92rem;
-    }
-
-
-    /* ==========================================
-       MOBILE
-       ========================================== */
-
-    @media (max-width: 850px) {
-
-        .hero {
-            padding: 2.6rem 1.5rem;
-        }
-
-        .circuit-art {
-            display: none;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-        }
-
-    }
-
-    </style>
-    """
-)
+</style>
+""")
 
 
 # ============================================================
 # HERO
 # ============================================================
 
-html(
-    """
-    <div class="hero">
+st.html("""
+<div class="hero">
 
-        <div class="circuit-art">
-            <div class="circuit-dot dot-one"></div>
-            <div class="circuit-dot dot-two"></div>
+    <div class="circuit">
+
+        <div class="circuit-line"></div>
+
+        <div class="circuit-text">
+            V = I × R
         </div>
 
-        <div class="hero-content">
+        <div class="dot dot-one"></div>
 
-            <div class="eyebrow">
-                ⚡ Interactive Electronics Learning
-            </div>
+        <div class="dot dot-two"></div>
 
-            <h1 class="hero-title">
-                Electronics
-                <br>
-                <span class="hero-highlight">
-                    made simple.
-                </span>
-            </h1>
+    </div>
 
-            <p class="hero-description">
-                Learn electronics from the ground up through
-                clear explanations, interactive experiments,
-                circuit analysis and practical challenges.
-            </p>
 
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            ⚡ Interactive Electronics Learning
+        </div>
+
+
+        <h1 class="hero-title">
+            Electronics
+            <br>
+            <span class="hero-highlight">
+                made simple.
+            </span>
+        </h1>
+
+
+        <div class="hero-description">
+            Learn electronics from the ground up through
+            clear explanations, interactive experiments,
+            circuit analysis and practical challenges.
         </div>
 
     </div>
-    """
-)
+
+</div>
+""")
 
 
 # ============================================================
 # HERO BUTTONS
 # ============================================================
 
-button_one, button_two = st.columns(2)
+left, right = st.columns(2)
 
-
-with button_one:
+with left:
 
     if st.button(
         "🚀  Start Learning",
@@ -700,7 +637,7 @@ with button_one:
         st.switch_page("app_fundamentals.py")
 
 
-with button_two:
+with right:
 
     if st.button(
         "🧪  Explore Circuit Analysis",
@@ -713,31 +650,28 @@ with button_two:
 # WHY ELECT4BEGINNERS
 # ============================================================
 
-html(
-    """
-    <div class="section">
+st.html("""
+<div class="section">
 
-        <div class="section-label">
-            WHY ELECT4BEGINNERS
-        </div>
-
-        <div class="section-title">
-            Learn by understanding, not memorising.
-        </div>
-
-        <div class="section-description">
-            Electronics becomes easier when you can connect
-            the theory to what actually happens inside a
-            circuit. Learn the concept, experiment with it,
-            then apply it.
-        </div>
-
+    <div class="section-label">
+        WHY ELECT4BEGINNERS
     </div>
-    """
-)
+
+    <div class="section-title">
+        Learn by understanding, not memorising.
+    </div>
+
+    <div class="section-description">
+        Electronics becomes easier when you can connect
+        theory to what actually happens inside a circuit.
+        Learn the concept, experiment with it, then apply it.
+    </div>
+
+</div>
+""")
 
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.write("")
 
 
 features = [
@@ -768,29 +702,28 @@ features = [
 ]
 
 
-feature_columns = st.columns(4)
+columns = st.columns(4)
 
+for column, item in zip(columns, features):
 
-for column, feature in zip(feature_columns, features):
-
-    icon, title, description = feature
+    icon, title, text = item
 
     with column:
 
-        html(
+        st.html(
             f"""
-            <div class="feature-card">
+            <div class="card">
 
-                <div class="feature-icon">
+                <div class="card-icon">
                     {icon}
                 </div>
 
-                <div class="feature-title">
+                <div class="card-title">
                     {title}
                 </div>
 
-                <div class="feature-text">
-                    {description}
+                <div class="card-text">
+                    {text}
                 </div>
 
             </div>
@@ -802,49 +735,47 @@ for column, feature in zip(feature_columns, features):
 # CURRICULUM
 # ============================================================
 
-html(
-    """
-    <div class="section">
+st.html("""
+<div class="section">
 
-        <div class="section-label">
-            THE CURRICULUM
-        </div>
-
-        <div class="section-title">
-            Start with the fundamentals.
-        </div>
-
-        <div class="section-description">
-            Work through the core areas of electronics,
-            from basic electrical principles to
-            semiconductors, digital systems and measurement.
-        </div>
-
+    <div class="section-label">
+        THE CURRICULUM
     </div>
-    """
-)
+
+    <div class="section-title">
+        Everything you need to build a foundation.
+    </div>
+
+    <div class="section-description">
+        Progress from basic electrical principles to
+        components, circuits, digital electronics,
+        semiconductors and measurement.
+    </div>
+
+</div>
+""")
 
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.write("")
 
 
 courses = [
     (
         "🔋",
         "Electrical Fundamentals",
-        "Voltage, current, resistance, power, energy, AC/DC and basic circuits.",
+        "Voltage, current, resistance, power, energy and basic circuits.",
         "app_fundamentals.py",
     ),
     (
         "⚡",
         "Electronic Components",
-        "Understand the components that make modern circuits work.",
+        "Understand the components that make electronic circuits work.",
         "app_components.py",
     ),
     (
         "🔌",
         "Logic Gates",
-        "Explore AND, OR, NOT, NAND, NOR, XOR and digital logic.",
+        "Explore AND, OR, NOT, NAND, NOR and XOR logic.",
         "app_gates.py",
     ),
     (
@@ -884,17 +815,17 @@ for start in range(0, len(courses), 4):
 
     row = courses[start:start + 4]
 
-    columns = st.columns(4)
+    cols = st.columns(4)
 
-    for column, course in zip(columns, row):
+    for col, course in zip(cols, row):
 
-        icon, title, description, page = course
+        icon, title, text, page = course
 
-        with column:
+        with col:
 
-            html(
+            st.html(
                 f"""
-                <div class="course-card">
+                <div class="course">
 
                     <div class="course-icon">
                         {icon}
@@ -904,8 +835,8 @@ for start in range(0, len(courses), 4):
                         {title}
                     </div>
 
-                    <div class="course-description">
-                        {description}
+                    <div class="course-text">
+                        {text}
                     </div>
 
                 </div>
@@ -914,7 +845,7 @@ for start in range(0, len(courses), 4):
 
             if st.button(
                 "Explore →",
-                key=f"explore_{page}",
+                key=f"course_{page}",
                 use_container_width=True,
             ):
                 st.switch_page(page)
@@ -924,203 +855,191 @@ for start in range(0, len(courses), 4):
 # LEARNING PATH
 # ============================================================
 
-html(
-    """
-    <div class="section">
+st.html("""
+<div class="section">
 
-        <div class="section-label">
-            LEARNING PATH
+    <div class="section-label">
+        LEARNING PATH
+    </div>
+
+    <div class="section-title">
+        Build your knowledge step by step.
+    </div>
+
+    <div class="section-description">
+        Start with the language of electricity, understand
+        the components, then learn how complete circuits
+        and electronic systems work.
+    </div>
+
+</div>
+""")
+
+
+st.write("")
+
+
+path_col, philosophy_col = st.columns([1.2, 1])
+
+
+with path_col:
+
+    st.html("""
+    <div class="path">
+
+        <div class="path-item">
+
+            <div class="path-number">1</div>
+
+            <div>
+                <div class="path-name">
+                    Electrical Fundamentals
+                </div>
+
+                <div class="path-small">
+                    Learn the language of electricity.
+                </div>
+            </div>
+
         </div>
 
-        <div class="section-title">
-            Build your knowledge step by step.
+
+        <div class="path-item">
+
+            <div class="path-number">2</div>
+
+            <div>
+                <div class="path-name">
+                    Electronic Components
+                </div>
+
+                <div class="path-small">
+                    Meet the building blocks of circuits.
+                </div>
+            </div>
+
         </div>
 
-        <div class="section-description">
-            Start with the language of electricity, understand
-            the components, then learn how complete circuits
-            and electronic systems work.
+
+        <div class="path-item">
+
+            <div class="path-number">3</div>
+
+            <div>
+                <div class="path-name">
+                    Circuit Analysis
+                </div>
+
+                <div class="path-small">
+                    Understand how components work together.
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="path-item">
+
+            <div class="path-number">4</div>
+
+            <div>
+                <div class="path-name">
+                    Digital Electronics
+                </div>
+
+                <div class="path-small">
+                    Move into modern electronic systems.
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="path-item">
+
+            <div class="path-number">5</div>
+
+            <div>
+                <div class="path-name">
+                    Measurements & Practice
+                </div>
+
+                <div class="path-small">
+                    Apply what you have learned.
+                </div>
+            </div>
+
         </div>
 
     </div>
-    """
-)
+    """)
 
 
-st.markdown("<br>", unsafe_allow_html=True)
+with philosophy_col:
 
+    st.html("""
+    <div class="card">
 
-path_column, philosophy_column = st.columns([1.2, 1])
-
-
-with path_column:
-
-    html(
-        """
-        <div class="path-card">
-
-            <div class="path-step">
-
-                <div class="path-number">
-                    1
-                </div>
-
-                <div>
-                    <div class="path-title">
-                        Electrical Fundamentals
-                    </div>
-
-                    <div class="path-description">
-                        Learn the language of electricity.
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="path-step">
-
-                <div class="path-number">
-                    2
-                </div>
-
-                <div>
-                    <div class="path-title">
-                        Electronic Components
-                    </div>
-
-                    <div class="path-description">
-                        Meet the building blocks of circuits.
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="path-step">
-
-                <div class="path-number">
-                    3
-                </div>
-
-                <div>
-                    <div class="path-title">
-                        Circuit Analysis
-                    </div>
-
-                    <div class="path-description">
-                        Understand how components work together.
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="path-step">
-
-                <div class="path-number">
-                    4
-                </div>
-
-                <div>
-                    <div class="path-title">
-                        Semiconductors & Digital Electronics
-                    </div>
-
-                    <div class="path-description">
-                        Move into modern electronic systems.
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="path-step">
-
-                <div class="path-number">
-                    5
-                </div>
-
-                <div>
-                    <div class="path-title">
-                        Measurements & Practice
-                    </div>
-
-                    <div class="path-description">
-                        Apply what you have learned.
-                    </div>
-                </div>
-
-            </div>
-
+        <div class="card-icon">
+            🧠
         </div>
-        """
-    )
 
+        <div class="card-title">
+            The Elect4Beginners approach
+        </div>
 
-with philosophy_column:
+        <div class="card-text">
 
-    html(
-        """
-        <div class="philosophy">
+            Don't just memorise that
+            <strong style="color:#e2e8f0;">
+                V = I × R
+            </strong>.
 
-            <div class="philosophy-icon">
-                🧠
-            </div>
+            Understand what voltage means,
+            see how resistance changes current,
+            calculate the result and then apply
+            it to an actual circuit.
 
-            <div class="philosophy-title">
-                The Elect4Beginners approach
-            </div>
+            <br><br>
 
-            <div class="philosophy-text">
+            The goal isn't simply to finish lessons.
 
-                Don't just memorise that
-                <strong style="color:#e2e8f0;">
-                    V = I × R
-                </strong>.
+            The goal is to understand electronics
+            well enough to use it.
 
-                Understand what voltage means,
-                see how resistance changes current,
-                calculate the result and then apply
-                it to an actual circuit.
+            <br><br>
 
-                <br><br>
-
-                The goal isn't simply to finish lessons.
-
-                The goal is to understand electronics
-                well enough to use it.
-
-            </div>
-
-            <div class="philosophy-highlight">
+            <strong style="color:#60a5fa;">
                 Understand → Experiment → Apply
-            </div>
+            </strong>
 
         </div>
-        """
-    )
+
+    </div>
+    """)
 
 
 # ============================================================
 # CTA
 # ============================================================
 
-html(
-    """
-    <div class="cta">
+st.html("""
+<div class="cta">
 
-        <div class="cta-title">
-            Ready to understand electronics?
-        </div>
-
-        <div class="cta-text">
-            Start with the fundamentals and build your
-            knowledge one concept at a time.
-        </div>
-
+    <div class="cta-title">
+        Ready to understand electronics?
     </div>
-    """
-)
+
+    <div class="cta-text">
+        Start with the fundamentals and build your
+        knowledge one concept at a time.
+    </div>
+
+</div>
+""")
 
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.write("")
 
 
 if st.button(
@@ -1135,27 +1054,16 @@ if st.button(
 # FOOTER
 # ============================================================
 
-html(
-    """
-    <div style="
-        margin-top:3rem;
-        padding-top:1.4rem;
-        border-top:1px solid rgba(148,163,184,.10);
-        text-align:center;
-        color:#475569;
-        font-size:.75rem;
-    ">
+st.html("""
+<div class="footer">
 
-        <strong style="color:#64748b;">
-            ⚡ Elect4Beginners
-        </strong>
+    <strong style="color:#64748b;">
+        ⚡ Elect4Beginners
+    </strong>
 
-        <span style="margin:0 8px;">
-            •
-        </span>
+    &nbsp; • &nbsp;
 
-        Electronics made simple.
+    Electronics made simple.
 
-    </div>
-    """
-)
+</div>
+""")
