@@ -1022,37 +1022,28 @@ if "quiz_submitted" not in st.session_state:
 if "quiz_answers" not in st.session_state:
     st.session_state.quiz_answers = {i: None for i in range(len(QUIZ))}
 
-# ============================================================================
-# SIDEBAR
-# ============================================================================
-st.sidebar.title("⚡ ELECTRONIC COMPONENTS")
-st.sidebar.subheader("LEARNING LAB")
-st.sidebar.markdown("---")
-st.sidebar.markdown("**📚 Student Instructions**")
-st.sidebar.markdown(
-    "1. Start with Introduction\n"
-    "2. Explore the components\n"
-    "3. Try the calculators\n"
-    "4. Experiment with the simulator\n"
-    "5. Study applications\n"
-    "6. Complete troubleshooting\n"
-    "7. Take the quiz"
+# ============================================================
+# MODULE SECTION NAVIGATION
+# ============================================================
+
+MODULE_SECTIONS = [
+    "🏠 Introduction",
+    "🔧 Components Explorer",
+    "📊 Component Comparison",
+    "🎛️ Interactive Simulator",
+    "🔬 Practical Applications",
+    "🧪 Troubleshooting Lab",
+    "📝 Quiz",
+]
+
+page = st.segmented_control(
+    "Learning sections",
+    MODULE_SECTIONS,
+    default=MODULE_SECTIONS[0],
+    key="components_section",
 )
-st.sidebar.markdown("---")
-page = st.sidebar.radio(
-    "Navigation",
-    [
-        "🏠 Introduction",
-        "🔧 Components Explorer",
-        "📊 Component Comparison",
-        "🎛️ Interactive Simulator",
-        "🔬 Practical Applications",
-        "🧪 Troubleshooting Lab",
-        "📝 Quiz",
-    ],
-)
-st.sidebar.markdown("---")
-st.sidebar.info("💡 Tip: Work through the sections in order for the smoothest learning experience.")
+
+st.markdown("---")
 
 # ============================================================================
 # TOP DASHBOARD (visible on every page)
