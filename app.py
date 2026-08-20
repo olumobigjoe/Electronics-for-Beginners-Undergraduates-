@@ -768,13 +768,3 @@ nav = st.navigation(
 )
 
 nav.run()
-# ============================================================
-# RUN NAVIGATION
-# ============================================================
-
-nav = st.navigation(
-    pages,
-    position="sidebar",
-)
-
-nav.run()

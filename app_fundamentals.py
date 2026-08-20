@@ -17,12 +17,6 @@ import matplotlib.pyplot as plt
 # ============================================================================
 # PAGE CONFIG
 # ============================================================================
-st.set_page_config(
-    page_title="Electrical Fundamentals Learning Lab",
-    page_icon="🔋",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
 
 # ============================================================================
 # CUSTOM CSS

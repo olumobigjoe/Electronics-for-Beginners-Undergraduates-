@@ -1,15 +1,6 @@
 import streamlit as st
 
 
-# ============================================================
-# PAGE CONFIG
-# ============================================================
-
-st.set_page_config(
-    page_title="Elect4Beginners | Electronics Made Simple",
-    page_icon="⚡",
-    layout="wide",
-)
 
 
 # ============================================================
