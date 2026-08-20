@@ -155,6 +155,57 @@ st.html(
 
 
     /* ========================================================
+       TOP MODULE TABS
+       Consistent, high-visibility navigation across every
+       learning module. No hover colour switching.
+       ======================================================== */
+
+    div[data-testid="stSegmentedControl"] {
+        width: 100% !important;
+        background: #123b66 !important;
+        border: 2px solid #2f74b5 !important;
+        border-radius: 12px !important;
+        padding: 7px !important;
+        margin: 0.35rem 0 0.9rem 0 !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.22) !important;
+    }
+
+    div[data-testid="stSegmentedControl"] > div {
+        gap: 7px !important;
+        flex-wrap: wrap !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button {
+        background: #2563a8 !important;
+        color: #ffffff !important;
+        border: 2px solid #2563a8 !important;
+        border-radius: 9px !important;
+        min-height: 52px !important;
+        padding: 9px 16px !important;
+        font-size: 0.96rem !important;
+        font-weight: 800 !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button:hover,
+    div[data-testid="stSegmentedControl"] button:focus,
+    div[data-testid="stSegmentedControl"] button:active,
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] {
+        background: #2563a8 !important;
+        color: #ffffff !important;
+        border-color: #2563a8 !important;
+        box-shadow: none !important;
+        filter: none !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button p,
+    div[data-testid="stSegmentedControl"] button span {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+    }
+
+    /* ========================================================
        SIDEBAR
        ======================================================== */
 

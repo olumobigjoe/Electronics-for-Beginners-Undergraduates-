@@ -354,6 +354,11 @@ MODULE_SECTIONS = [
     "5️⃣ Quiz",
 ]
 
+st.markdown(
+    """<div class="section-nav-title">📚 Learning Sections</div><div class="section-nav-help">Choose a tab below to move through the Logic Gates learning lab.</div>""",
+    unsafe_allow_html=True,
+)
+
 page = st.segmented_control(
     "Learning sections",
     MODULE_SECTIONS,
@@ -408,7 +413,7 @@ if page.startswith("1"):
             """,
             unsafe_allow_html=True,
         )
-    st.success("👉 Head to **'Types of Gates'** in the sidebar to explore all 7 gates.")
+    st.success("👉 Use the **2️⃣ Types of Gates** tab above to explore all 7 gates.")
 
 # ----------------------------------------------------------------------
 # 2. TYPES OF GATES

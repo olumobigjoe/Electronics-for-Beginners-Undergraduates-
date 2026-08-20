@@ -870,6 +870,11 @@ MODULE_SECTIONS = [
     "📝 Quiz",
 ]
 
+st.markdown(
+    """<div class="section-nav-title">📚 Learning Sections</div><div class="section-nav-help">Choose a tab below to move through the Circuit Analysis learning lab.</div>""",
+    unsafe_allow_html=True,
+)
+
 page = st.segmented_control(
     "Learning sections",
     MODULE_SECTIONS,
@@ -936,7 +941,7 @@ if page.startswith("🏠"):
         unsafe_allow_html=True,
     )
 
-    st.success("👉 Head to **'Circuit Elements & Sources'** in the sidebar to explore the building blocks these methods work with.")
+    st.success("👉 Use the **🔎 Circuit Elements & Sources** tab above to explore the building blocks these methods work with.")
 
 # ============================================================================
 # 2. CIRCUIT ELEMENTS & SOURCES

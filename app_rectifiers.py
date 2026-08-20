@@ -835,6 +835,11 @@ MODULE_SECTIONS = [
     "📝 Quiz",
 ]
 
+st.markdown(
+    """<div class="section-nav-title">📚 Learning Sections</div><div class="section-nav-help">Choose a tab below to move through the Diodes & Rectifiers learning lab.</div>""",
+    unsafe_allow_html=True,
+)
+
 page = st.segmented_control(
     "Learning sections",
     MODULE_SECTIONS,
@@ -901,7 +906,7 @@ if page.startswith("🏠"):
         unsafe_allow_html=True,
     )
 
-    st.success("👉 Head to **'Diode Types Explorer'** in the sidebar to study each diode type in detail.")
+    st.success("👉 Use the **🔎 Diode Types Explorer** tab above to study each diode type in detail.")
 
 # ============================================================================
 # 2. DIODE TYPES EXPLORER

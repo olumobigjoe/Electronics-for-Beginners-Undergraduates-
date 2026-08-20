@@ -800,6 +800,11 @@ MODULE_SECTIONS = [
     "📝 Quiz",
 ]
 
+st.markdown(
+    """<div class="section-nav-title">📚 Learning Sections</div><div class="section-nav-help">Choose a tab below to move through the Digital Electronics learning lab.</div>""",
+    unsafe_allow_html=True,
+)
+
 page = st.segmented_control(
     "Learning sections",
     MODULE_SECTIONS,
@@ -869,7 +874,7 @@ if page.startswith("🏠"):
         unsafe_allow_html=True,
     )
 
-    st.success("👉 Head to **'Number Systems & Codes'** in the sidebar to explore each one in detail.")
+    st.success("👉 Use the **🔢 Number Systems & Codes** tab above to explore each one in detail.")
 
 # ============================================================================
 # 2. NUMBER SYSTEMS & CODES

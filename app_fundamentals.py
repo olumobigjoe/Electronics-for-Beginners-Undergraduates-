@@ -112,53 +112,6 @@ st.markdown(
 
     h1, h2, h3 { color: #f9fafb; }
 
-    /* ========================================================
-       TOP LEARNING TAB NAVIGATION
-       ======================================================== */
-    .section-nav-title {
-        color: #f8fafc;
-        font-size: 1.05rem;
-        font-weight: 800;
-        margin-top: 0.25rem;
-        margin-bottom: 0.15rem;
-    }
-    .section-nav-help {
-        color: #9fb1c8;
-        font-size: 0.9rem;
-        margin-bottom: 0.7rem;
-    }
-    div[data-testid="stSegmentedControl"] {
-        background: #0b1b31 !important;
-        border: 1px solid #28496f !important;
-        border-radius: 14px !important;
-        padding: 6px !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.22) !important;
-    }
-    div[data-testid="stSegmentedControl"] button {
-        background: transparent !important;
-        color: #c9d8eb !important;
-        border: 1px solid transparent !important;
-        border-radius: 10px !important;
-        min-height: 42px !important;
-        font-weight: 750 !important;
-        transition: all 0.15s ease !important;
-    }
-    div[data-testid="stSegmentedControl"] button:hover {
-        background: #17355a !important;
-        color: #ffffff !important;
-        border-color: #3978b9 !important;
-    }
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] {
-        background: linear-gradient(135deg, #2563eb, #0891b2) !important;
-        color: #ffffff !important;
-        border-color: #67e8f9 !important;
-        box-shadow: 0 4px 14px rgba(14,165,233,0.28) !important;
-    }
-    div[data-testid="stSegmentedControl"] button p,
-    div[data-testid="stSegmentedControl"] button span {
-        color: inherit !important;
-        font-weight: 750 !important;
-    }
     </style>
     """,
     unsafe_allow_html=True,

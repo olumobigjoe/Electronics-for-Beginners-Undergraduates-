@@ -1030,6 +1030,11 @@ MODULE_SECTIONS = [
     "📝 Quiz",
 ]
 
+st.markdown(
+    """<div class="section-nav-title">📚 Learning Sections</div><div class="section-nav-help">Choose a tab below to move through the Electronic Components learning lab.</div>""",
+    unsafe_allow_html=True,
+)
+
 page = st.segmented_control(
     "Learning sections",
     MODULE_SECTIONS,
@@ -1135,7 +1140,7 @@ if page.startswith("🏠"):
             unsafe_allow_html=True,
         )
 
-    st.success("👉 Head to **'Components Explorer'** in the sidebar to study each component in detail.")
+    st.success("👉 Use the **🔧 Components Explorer** tab above to study each component in detail.")
 
 # ============================================================================
 # 2. COMPONENTS EXPLORER
