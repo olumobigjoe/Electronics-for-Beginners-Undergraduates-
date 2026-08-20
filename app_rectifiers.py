@@ -827,38 +827,28 @@ if "quiz_submitted" not in st.session_state:
 if "quiz_answers" not in st.session_state:
     st.session_state.quiz_answers = {i: None for i in range(len(QUIZ))}
 
-# ============================================================================
-# SIDEBAR
-# ============================================================================
-st.sidebar.title("🔺 DIODES & RECTIFIERS")
-st.sidebar.subheader("LEARNING LAB")
-st.sidebar.markdown("---")
-st.sidebar.markdown("**📚 Student Instructions**")
-st.sidebar.markdown(
-    "1. Start with Introduction\n"
-    "2. Explore diode types\n"
-    "3. Study rectifier circuits\n"
-    "4. Experiment with the simulator\n"
-    "5. Study applications\n"
-    "6. Complete troubleshooting\n"
-    "7. Take the quiz"
-)
-st.sidebar.markdown("---")
-page = st.sidebar.radio(
-    "Navigation",
-    [
-        "🏠 Introduction",
-        "🔎 Diode Types Explorer",
-        "⚡ Rectifier Circuits",
-        "🎛️ Interactive Simulator",
-        "🔬 Practical Applications",
-        "🧪 Troubleshooting Lab",
-        "📝 Quiz",
-    ],
-)
-st.sidebar.markdown("---")
-st.sidebar.info("💡 Tip: Work through the sections in order for the smoothest learning experience.")
+# ============================================================
+# MODULE SECTION NAVIGATION
+# ============================================================
 
+MODULE_SECTIONS = [
+    "🏠 Introduction",
+    "🔎 Diode Types Explorer",
+    "⚡ Rectifier Circuits",
+    "🎛️ Interactive Simulator",
+    "🔬 Practical Applications",
+    "🧪 Troubleshooting Lab",
+    "📝 Quiz",
+]
+
+page = st.segmented_control(
+    "Learning sections",
+    MODULE_SECTIONS,
+    default=MODULE_SECTIONS[0],
+    key="rectifiers_section",
+)
+
+st.markdown("---")
 # ============================================================================
 # TOP DASHBOARD (visible on every page)
 # ============================================================================
