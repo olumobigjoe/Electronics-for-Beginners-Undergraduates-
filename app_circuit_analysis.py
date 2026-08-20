@@ -862,38 +862,28 @@ if "quiz_submitted" not in st.session_state:
 if "quiz_answers" not in st.session_state:
     st.session_state.quiz_answers = {i: None for i in range(len(QUIZ))}
 
-# ============================================================================
-# SIDEBAR
-# ============================================================================
-st.sidebar.title("🧮 CIRCUIT ANALYSIS")
-st.sidebar.subheader("LEARNING LAB")
-st.sidebar.markdown("---")
-st.sidebar.markdown("**📚 Student Instructions**")
-st.sidebar.markdown(
-    "1. Start with Introduction\n"
-    "2. Explore circuit elements & sources\n"
-    "3. Study theorems & analysis methods\n"
-    "4. Experiment with the simulator\n"
-    "5. Study applications\n"
-    "6. Complete troubleshooting\n"
-    "7. Take the quiz"
-)
-st.sidebar.markdown("---")
-page = st.sidebar.radio(
-    "Navigation",
-    [
-        "🏠 Introduction",
-        "🔎 Circuit Elements & Sources",
-        "📐 Theorems & Analysis Methods",
-        "🎛️ Interactive Simulator",
-        "🔬 Practical Applications",
-        "🧪 Troubleshooting Lab",
-        "📝 Quiz",
-    ],
-)
-st.sidebar.markdown("---")
-st.sidebar.info("💡 Tip: Work through the sections in order for the smoothest learning experience.")
+# ============================================================
+# MODULE SECTION NAVIGATION
+# ============================================================
 
+MODULE_SECTIONS = [
+    "🏠 Introduction",
+    "🔎 Circuit Elements & Sources",
+    "📐 Theorems & Analysis Methods",
+    "🎛️ Interactive Simulator",
+    "🔬 Practical Applications",
+    "🧪 Troubleshooting Lab",
+    "📝 Quiz",
+]
+
+page = st.segmented_control(
+    "Learning sections",
+    MODULE_SECTIONS,
+    default=MODULE_SECTIONS[0],
+    key="circuit_analysis_section",
+)
+
+st.markdown("---")
 # ============================================================================
 # TOP DASHBOARD (visible on every page)
 # ============================================================================
