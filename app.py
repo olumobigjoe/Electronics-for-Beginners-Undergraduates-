@@ -478,30 +478,37 @@ st.html(
 
 
     /* ========================================================
-       TABS
+       TABS — HIGH VISIBILITY, SINGLE COLOUR
        ======================================================== */
 
+    /* Every tab uses the same strong colour; no hover/selected recolouring. */
     button[data-baseweb="tab"] {
-
-        color:
-            #a8b8cc !important;
-
-        font-weight:
-            650 !important;
+        color: #ffffff !important;
+        background: #075985 !important;
+        font-weight: 750 !important;
+        font-size: 1rem !important;
+        min-height: 56px !important;
+        padding: 14px 22px !important;
+        border: 2px solid #075985 !important;
+        border-radius: 10px 10px 0 0 !important;
+        opacity: 1 !important;
+        box-shadow: none !important;
+        transition: none !important;
     }
 
-
+    button[data-baseweb="tab"]:hover,
+    button[data-baseweb="tab"]:focus,
     button[data-baseweb="tab"][aria-selected="true"] {
-
-        color:
-            #60a5fa !important;
+        color: #ffffff !important;
+        background: #075985 !important;
+        border-color: #075985 !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
     }
-
 
     div[data-baseweb="tab-highlight"] {
-
-        background:
-            #3b82f6 !important;
+        background: #075985 !important;
+        height: 4px !important;
     }
 
 
