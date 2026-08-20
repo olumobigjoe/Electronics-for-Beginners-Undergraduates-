@@ -683,35 +683,7 @@ st.html(
 )
 
 
-# ============================================================
-# SIDEBAR BRAND
-# ============================================================
 
-with st.sidebar:
-
-    st.html(
-        """
-        <div class="sidebar-brand">
-
-            <div class="sidebar-brand-title">
-                ⚡ Elect4Beginners
-            </div>
-
-            <div class="sidebar-brand-subtitle">
-                Electronics made simple
-            </div>
-
-        </div>
-        """
-    )
-
-    st.html(
-        """
-        <div class="sidebar-label">
-            Learning Hub
-        </div>
-        """
-    )
 
 
 # ============================================================
@@ -786,6 +758,16 @@ pages = [
 ]
 
 
+# ============================================================
+# RUN NAVIGATION
+# ============================================================
+
+nav = st.navigation(
+    pages,
+    position="sidebar",
+)
+
+nav.run()
 # ============================================================
 # RUN NAVIGATION
 # ============================================================
