@@ -5,13 +5,18 @@ import streamlit as st
 
 # ============================================================
 # ELECT4BEGINNERS
-# Main application
+# Main application / navigation
 # ============================================================
 
-# BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent
+
+
+# ============================================================
+# PAGE CONFIG
+# ============================================================
 
 st.set_page_config(
-    page_title="Elect4Beginners — Electronics Made Simple",
+    page_title="Elect4Beginners | Electronics Made Simple",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -19,93 +24,148 @@ st.set_page_config(
 
 
 # ============================================================
-# GLOBAL STYLES
+# GLOBAL STYLING
 # ============================================================
 
-st.markdown(
+st.html(
     """
     <style>
-    :root {
-        --navy: #07111f;
-        --navy-light: #0b1729;
-        --blue: #2563eb;
-        --blue-light: #60a5fa;
-        --cyan: #06b6d4;
-        --text: #f8fafc;
-        --muted: #94a3b8;
-    }
+
+    /* =========================================
+       APP BACKGROUND
+       ========================================= */
 
     .stApp {
         background:
             radial-gradient(
-                circle at 85% 0%,
-                rgba(6, 182, 212, 0.08),
+                circle at 90% 0%,
+                rgba(6, 182, 212, 0.07),
                 transparent 28%
             ),
             radial-gradient(
-                circle at 10% 30%,
-                rgba(37, 99, 235, 0.08),
+                circle at 5% 30%,
+                rgba(37, 99, 235, 0.07),
                 transparent 30%
             ),
             #07111f;
     }
 
+
     .block-container {
         max-width: 1400px;
+
         padding-top: 1.5rem;
         padding-bottom: 4rem;
     }
 
-    h1, h2, h3, h4 {
-        color: #f8fafc !important;
-    }
 
-    p {
-        color: #cbd5e1;
-    }
-
-    /* SIDEBAR */
+    /* =========================================
+       SIDEBAR
+       ========================================= */
 
     section[data-testid="stSidebar"] {
         background:
             linear-gradient(
                 180deg,
                 #07111f 0%,
-                #091526 100%
+                #091525 100%
             );
 
         border-right:
             1px solid
-            rgba(148, 163, 184, 0.12);
+            rgba(148, 163, 184, 0.10);
     }
+
 
     section[data-testid="stSidebar"] > div {
         padding-top: 1rem;
     }
 
+
+    /* =========================================
+       SIDEBAR HEADER
+       ========================================= */
+
+    .sidebar-brand {
+        padding: 8px 4px 18px 4px;
+
+        border-bottom:
+            1px solid
+            rgba(148, 163, 184, 0.10);
+
+        margin-bottom: 14px;
+    }
+
+
+    .sidebar-brand-title {
+        color: #f8fafc;
+
+        font-size: 1.05rem;
+
+        font-weight: 850;
+
+        letter-spacing: -0.025em;
+    }
+
+
+    .sidebar-brand-subtitle {
+        color: #64748b;
+
+        font-size: 0.72rem;
+
+        margin-top: 3px;
+    }
+
+
+    .sidebar-label {
+        color: #60a5fa;
+
+        font-size: 0.66rem;
+
+        font-weight: 800;
+
+        letter-spacing: 0.12em;
+
+        text-transform: uppercase;
+
+        margin: 8px 4px;
+    }
+
+
+    /* =========================================
+       NAVIGATION
+       ========================================= */
+
     section[data-testid="stSidebar"]
     [data-testid="stPageLink"] {
         border-radius: 9px;
+
         margin: 3px 0;
+
+        transition:
+            background 0.15s ease;
     }
+
 
     section[data-testid="stSidebar"]
     [data-testid="stPageLink"]:hover {
         background:
-            rgba(37, 99, 235, 0.12);
+            rgba(37, 99, 235, 0.10);
     }
 
-    /* BUTTONS */
+
+    /* =========================================
+       BUTTONS
+       ========================================= */
 
     .stButton > button {
-        border-radius: 10px;
         min-height: 44px;
+
+        border-radius: 10px;
 
         font-weight: 700;
 
-        border:
-            1px solid
-            rgba(96, 165, 250, 0.22);
+        color: white;
 
         background:
             linear-gradient(
@@ -114,104 +174,187 @@ st.markdown(
                 #1d4ed8
             );
 
-        color: white;
+        border:
+            1px solid
+            rgba(96, 165, 250, 0.20);
 
         transition:
-            all 0.2s ease;
+            transform 0.18s ease,
+            box-shadow 0.18s ease;
     }
+
 
     .stButton > button:hover {
         transform: translateY(-2px);
 
-        border-color:
-            rgba(96, 165, 250, 0.6);
-
         box-shadow:
             0 12px 30px
-            rgba(37, 99, 235, 0.25);
+            rgba(37, 99, 235, 0.22);
     }
 
-    hr {
-        border-color:
-            rgba(148, 163, 184, 0.1);
-    }
+
+    /* =========================================
+       MOBILE
+       ========================================= */
 
     @media (max-width: 768px) {
+
         .block-container {
             padding-left: 1rem;
             padding-right: 1rem;
         }
+
     }
+
     </style>
-    """,
-    unsafe_allow_html=True,
+    """
 )
 
 
 # ============================================================
-# PAGES
+# SIDEBAR BRAND
+#
+# IMPORTANT:
+# This uses st.html() rather than st.markdown()
+# so the HTML cannot appear as a white code box.
+# ============================================================
+
+with st.sidebar:
+
+    st.html(
+        """
+        <div class="sidebar-brand">
+
+            <div class="sidebar-brand-title">
+                ⚡ Elect4Beginners
+            </div>
+
+            <div class="sidebar-brand-subtitle">
+                Electronics made simple
+            </div>
+
+        </div>
+        """
+    )
+
+    st.html(
+        """
+        <div class="sidebar-label">
+            Learning Hub
+        </div>
+        """
+    )
+
+
+# ============================================================
+# NAVIGATION PAGES
 # ============================================================
 
 pages = [
+
+    # --------------------------------------------------------
+    # HOME
+    # --------------------------------------------------------
+
     st.Page(
-        "home.py",
+        str(BASE_DIR / "home.py"),
         title="Home",
         icon="🏠",
         url_path="home",
         default=True,
     ),
 
+
+    # --------------------------------------------------------
+    # ELECTRICAL FUNDAMENTALS
+    # --------------------------------------------------------
+
     st.Page(
-        "app_fundamentals.py",
+        str(BASE_DIR / "app_fundamentals.py"),
         title="Electrical Fundamentals",
         icon="🔋",
         url_path="fundamentals",
     ),
 
+
+    # --------------------------------------------------------
+    # ELECTRONIC COMPONENTS
+    # --------------------------------------------------------
+
     st.Page(
-        "app_components.py",
+        str(BASE_DIR / "app_components.py"),
         title="Electronic Components",
         icon="⚡",
         url_path="components",
     ),
 
+
+    # --------------------------------------------------------
+    # LOGIC GATES
+    # --------------------------------------------------------
+
     st.Page(
-        "app_gates.py",
+        str(BASE_DIR / "app_gates.py"),
         title="Logic Gates",
         icon="🔌",
         url_path="logic-gates",
     ),
 
+
+    # --------------------------------------------------------
+    # DIGITAL ELECTRONICS
+    # --------------------------------------------------------
+
     st.Page(
-        "app_digital_electronics.py",
+        str(BASE_DIR / "app_digital_electronics.py"),
         title="Digital Electronics",
         icon="💾",
         url_path="digital-electronics",
     ),
 
+
+    # --------------------------------------------------------
+    # CIRCUIT ANALYSIS
+    # --------------------------------------------------------
+
     st.Page(
-        "app_circuit_analysis.py",
+        str(BASE_DIR / "app_circuit_analysis.py"),
         title="Circuit Analysis",
         icon="🧮",
         url_path="circuit-analysis",
     ),
 
+
+    # --------------------------------------------------------
+    # DIODES & RECTIFIERS
+    # --------------------------------------------------------
+
     st.Page(
-        "app_rectifiers.py",
+        str(BASE_DIR / "app_rectifiers.py"),
         title="Diodes & Rectifiers",
         icon="🔺",
         url_path="rectifiers",
     ),
 
+
+    # --------------------------------------------------------
+    # TRANSISTORS & AMPLIFIERS
+    # --------------------------------------------------------
+
     st.Page(
-        "app_amplifiers.py",
+        str(BASE_DIR / "app_amplifiers.py"),
         title="Transistors & Amplifiers",
         icon="🔀",
         url_path="amplifiers",
     ),
 
+
+    # --------------------------------------------------------
+    # MEASUREMENTS
+    # --------------------------------------------------------
+
     st.Page(
-        "app_measurements.py",
+        str(BASE_DIR / "app_measurements.py"),
         title="Measurements & Instruments",
         icon="📏",
         url_path="measurements",
@@ -220,153 +363,17 @@ pages = [
 
 
 # ============================================================
-# SIDEBAR BRAND
-# ============================================================
-
-with st.sidebar:
-
-    st.markdown(
-        """
-        <div style="
-            padding: 0.4rem 0.2rem 1rem 0.2rem;
-        ">
-
-            <div style="
-                display:flex;
-                align-items:center;
-                gap:10px;
-            ">
-
-                <div style="
-                    width:42px;
-                    height:42px;
-                    border-radius:12px;
-
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-
-                    background:
-                        linear-gradient(
-                            135deg,
-                            #2563eb,
-                            #06b6d4
-                        );
-
-                    font-size:22px;
-
-                    box-shadow:
-                        0 8px 24px
-                        rgba(37,99,235,.25);
-                ">
-                    ⚡
-                </div>
-
-                <div>
-
-                    <div style="
-                        color:#f8fafc;
-                        font-size:1.02rem;
-                        font-weight:800;
-                        letter-spacing:-.02em;
-                    ">
-                        Elect4Beginners
-                    </div>
-
-                    <div style="
-                        color:#64748b;
-                        font-size:.7rem;
-                        margin-top:2px;
-                    ">
-                        Electronics made simple
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.caption("LEARN")
-
-    st.markdown(
-        """
-        <div style="
-            padding:12px;
-            margin-top:8px;
-            margin-bottom:14px;
-            border-radius:12px;
-
-            background:
-                rgba(37,99,235,.07);
-
-            border:
-                1px solid
-                rgba(96,165,250,.10);
-        ">
-
-            <div style="
-                color:#60a5fa;
-                font-size:.68rem;
-                font-weight:800;
-                text-transform:uppercase;
-                letter-spacing:.08em;
-            ">
-                Learning journey
-            </div>
-
-            <div style="
-                color:#e2e8f0;
-                font-size:.88rem;
-                font-weight:700;
-                margin-top:5px;
-            ">
-                Start with the fundamentals
-            </div>
-
-            <div style="
-                color:#64748b;
-                font-size:.73rem;
-                line-height:1.4;
-                margin-top:4px;
-            ">
-                Build your electronics knowledge
-                one concept at a time.
-            </div>
-
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.caption("ELECT4BEGINNERS")
-
-    st.markdown(
-        """
-        <div style="
-            color:#475569;
-            font-size:.72rem;
-            line-height:1.6;
-        ">
-            Learn<br>
-            Experiment<br>
-            Understand
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-# ============================================================
-# RUN NAVIGATION
+# CREATE NAVIGATION
 # ============================================================
 
 nav = st.navigation(
     pages,
     position="sidebar",
 )
+
+
+# ============================================================
+# RUN SELECTED PAGE
+# ============================================================
 
 nav.run()
