@@ -348,26 +348,26 @@ if "quiz_submitted" not in st.session_state:
 if "quiz_answers" not in st.session_state:
     st.session_state.quiz_answers = {i: None for i in range(len(QUIZ))}
 
-# ----------------------------------------------------------------------
-# SIDEBAR NAVIGATION
-# ----------------------------------------------------------------------
-st.sidebar.title("🔌 Logic Gates")
-st.sidebar.caption("Module 1 · Digital Electronics Fundamentals")
-page = st.sidebar.radio(
-    "Navigate",
-    [
-        "1️⃣ Introduction",
-        "2️⃣ Types of Gates",
-        "3️⃣ Uses & Applications",
-        "4️⃣ Gate Simulator",
-        "5️⃣ Quiz",
-    ],
+# ============================================================
+# MODULE SECTION NAVIGATION
+# ============================================================
+
+MODULE_SECTIONS = [
+    "1️⃣ Introduction",
+    "2️⃣ Types of Gates",
+    "3️⃣ Uses & Applications",
+    "4️⃣ Gate Simulator",
+    "5️⃣ Quiz",
+]
+
+page = st.segmented_control(
+    "Learning sections",
+    MODULE_SECTIONS,
+    default=MODULE_SECTIONS[0],
+    key="gates_section",
 )
-st.sidebar.markdown("---")
-st.sidebar.info(
-    "💡 Tip: Work through the sections in order. Use the **Simulator** to "
-    "build intuition before attempting the **Quiz**."
-)
+
+st.markdown("---")
 
 # ----------------------------------------------------------------------
 # 1. INTRODUCTION
